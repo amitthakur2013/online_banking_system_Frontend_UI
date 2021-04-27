@@ -1,0 +1,39 @@
+<!--
+<mat-toolbar color="primary">
+	
+	<span style="color:white">Online Banking App</span>
+	<span class="example-spacer"></span>
+	<a *ngIf="!loggedIn" mat-icon-button routerLink="/login">Login</a>
+	<a *ngIf="loggedIn" mat-icon-button routerLink="/banking/account/dashboard">Dashboard</a>
+	<a *ngIf="loggedIn" mat-icon-button routerLink="#">Add Beneficiary</a>
+	<a *ngIf="loggedIn" mat-icon-button routerLink="#">Manage Beneficiary</a>
+	<a *ngIf="loggedIn" mat-icon-button routerLink="#">Fund Transfer</a>
+	<a *ngIf="loggedIn" mat-icon-button (click)="logoutUser()">Logout</a>
+</mat-toolbar>
+-->
+
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+	<a routerLinkActive="active" routerLink="" class="navbar-brand">Online Banking App</a>
+  <ul class="navbar-nav ml-auto">
+  	<li class="nav-item">
+      <a *ngIf="!loggedIn" routerLinkActive="active" routerLink="/login" class="nav-link"> Login </a>
+    </li>
+    <li class="nav-item">
+      <a *ngIf="loggedIn" routerLinkActive="active" routerLink="/banking/account/dashboard" class="nav-link"> Dashboard </a>
+    </li>
+    <li class="nav-item">
+      <a *ngIf="loggedIn" routerLinkActive="inactive" routerLink="" class="nav-link"> Add Beneficiary </a>
+    </li>
+    <li class="nav-item">
+      <a *ngIf="loggedIn" routerLinkActive="inactive" routerLink="" class="nav-link"> Manage Beneficiary </a>
+    </li>
+    <li class="nav-item">
+      <a *ngIf="loggedIn" routerLinkActive="inactive" routerLink="" class="nav-link"> Fund Transfer </a>
+    </li>
+    <li class="nav-item">
+      <a *ngIf="loggedIn" (click)="logoutUser()" routerLinkActive="inactive" routerLink="" class="nav-link"> Logout </a>
+    </li>
+    
+  </ul>
+  
+</nav>

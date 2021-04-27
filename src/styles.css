@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+html, body { height: 100%; }
+body { 
+	margin: 0; 
+	font-family: Roboto, "Helvetica Neue", sans-serif; 
+	background-image: url('https://www.agdelta.com/wp-content/uploads/2018/06/website-parallax-background-C.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	color: white;
+}
+.text-center{
+	text-align: center;
+}
+
+.mt{
+	margin: 20px;
+}
+
+
+.footer{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 50px;
+	background-color: grey;
+	text-align: center;
+	color: white;
+	opacity: 0.75;
+}
