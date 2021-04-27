@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 })
 export class DashboardDetailsComponent implements OnInit {
 	userdata:Object;
-	accountsdata:Object;
+	accountsdata:[];
 	selectedLevel;
 	setEnable:true;
 

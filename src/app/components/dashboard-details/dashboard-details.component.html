@@ -2,13 +2,16 @@
 	<h2 class="text-center mt-2">Welcome, {{userdata['firstName']}}!</h2><br/>
 	<div class="row">
 		<div class="col-md-6">
-			<h3>Profile Details</h3><br/>
-			<ul>
-				<li>Name: {{userdata["firstName"]+" "+userdata["lastName"]}}</li><br/>
-				<li>Address: {{userdata['address']}}</li><br/>
-				<li>Email : {{userdata['email']}}</li><br/>
-				<li>Phone No : {{userdata["phoneNo"]}}</li>
+			<div style="color:black" class="card container">
+			<h3 class="card card-header mt-2">Profile Details</h3><br/>
+			<ul style="padding: 20px;list-style-type: none;background-color:#e2e2e2" class="card">
+				<li><b>Name: </b>{{userdata["firstName"]+" "+userdata["lastName"]}}</li><hr/>
+				<li><b>Address: </b>{{userdata['address']}}</li><hr/>
+				<li><b>Email : </b>{{userdata['email']}}</li><hr/>
+				<li><b>Phone No :</b> {{userdata["phoneNo"]}}</li><hr/>
+				<li><b>Total Accounts :</b> {{accountsdata.length}}</li>
 			</ul>
+			</div>
 		</div>
 		<div class="col-md-6">
 			<h3>Accounts</h3><br/>

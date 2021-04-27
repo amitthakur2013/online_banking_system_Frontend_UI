@@ -1,27 +1,31 @@
 <div class="container mt-2" >
 	<div class="row">
-		<div class="col-md-3 col-12 mt-1" style="background-color: white;color: black;border-radius: 0.25rem">
-			<h3 class="text-center">Account Details</h3><br/>
+		<div class="col-md-3 col-12 mt-1 card" style="background-color: white;color: black;border-radius: 0.25rem">
+			<h3 class="text-center card-header mt-2">Account Summary</h3><br/>
 
-			<ul>
+			<ul class="card-body card">
 				<li>
-					Account No : {{accountsinfo["id"].acctNo}}
-				</li><br/>
+					<b>Account No : </b>{{accountsinfo["id"].acctNo}}
+				</li><hr/>
 				<li>
-					Account Type : {{accountsinfo['acctType'] }}
-				</li><br/>
+					<b>Account Type : </b>{{accountsinfo['acctType'] }}
+				</li><hr/>
 				<li>
-					Operation Type : {{ accountsinfo['operationType'] }}
-				</li><br/>
+					<b>Operation Type : </b>{{ accountsinfo['operationType'] }}
+				</li><hr/>
 				<li>
-					Ifsc Code : {{ accountsinfo['branch'].ifscCode }}
+					<b>Ifsc Code : </b>{{ accountsinfo['branch'].ifscCode }}
 				</li>
 
 			</ul>
 		</div>
 		<div class="offset-md-1 col-md-8 col-12" style="background-color: white;color: black;border-radius: 0.25rem">
-			<h3 class="text-center">Mini Statement</h3>
-			<table class="table table-striped">
+			<h2 class="text-center mt-2">Mini Statement</h2>
+			<div *ngIf="!transinfo.length">
+				<hr/>
+				<h1  class="text-center">No Transactions Yet!</h1>
+			</div>
+			<table *ngIf="transinfo.length" class="table table-striped">
 				<thead>
 					<tr>
 						<th>Ref No.</th>

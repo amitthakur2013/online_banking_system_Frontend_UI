@@ -13,6 +13,10 @@ export class LoginComponent implements OnInit {
 	password:""
 	}
 
+  errFields=false;
+
+  errUnauth=0;
+
   constructor(private loginService:LoginService) { }
 
   ngOnInit(): void {
@@ -28,14 +32,17 @@ export class LoginComponent implements OnInit {
    	console.log(response);
    	this.loginService.loginUser(response['token']);
    	window.location.href="/banking/account/dashboard";
+    this.errFields=false;
+    this.errUnauth=0;
 
    	},error => {
-   	
+   	this.errUnauth=error.status;
    	console.log(error);
    	});
 
 
    } else{
+   this.errFields=true;
    console.log("Fields are empty");
    }
   }

@@ -30,3 +30,6 @@ body {
 	color: white;
 	opacity: 0.75;
 }
+a {
+ 	text-decoration: none!important;
+ }
