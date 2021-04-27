@@ -15,7 +15,7 @@ const routes: Routes = [
 	pathMatch:'full'
 },
 {
-	path:"login",
+	path:"banking/login",
 	component:LoginComponent
 },
 {
