@@ -1,12 +1,12 @@
 <div class="bootstrap-wrapper">
 	<div class="container text-center mt">
 		<div class="row">
-			<div class="col-md-6 offset-md-3">
-				<h1>
-					Login Here!!
+			<div class="col-md-6 offset-md-3 card">
+				<h1 class="">
+					Login
 
 					<!--Form-->
-					<div class="container" style="background-color: #E2E2E2;border-radius: 0.25rem;height:250px">
+					<div class="container" style="background-color: #E2E2E2;border-radius: 0.25rem;height:260px">
 						<form (ngSubmit)="onSubmit()">
 							<mat-form-field class="full-width">
 								<mat-label color="red">
@@ -22,7 +22,7 @@
 								<input style="color: black" type="password" matInput required [(ngModel)]="credentials.password" name="password">
 							</mat-form-field>
 
-							<div class="container text-center ">
+							<div class="container text-center">
 								<button style="margin-right: 20px" type="submit" mat-raised-button color="primary">Login</button>
 								<button type="reset" mat-raised-button color="accent">Reset</button>
 							</div>
