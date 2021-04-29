@@ -28,7 +28,7 @@
       <a *ngIf="loggedIn" routerLinkActive="inactive" routerLink="" class="nav-link"> Manage Beneficiary </a>
     </li>
     <li class="nav-item">
-      <a *ngIf="loggedIn" routerLinkActive="inactive" routerLink="" class="nav-link"> Fund Transfer </a>
+      <a *ngIf="loggedIn" routerLinkActive="active" routerLink="/banking/transfer/fund_transfer" class="nav-link"> Fund Transfer </a>
     </li>
     <li class="nav-item">
       <a *ngIf="loggedIn" (click)="logoutUser()" routerLinkActive="inactive" routerLink="" class="nav-link"> Logout </a>
