@@ -15,10 +15,13 @@ import { AccountDetailsComponent } from './components/account-details/account-de
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import {FormsModule} from '@angular/forms';
+import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from './services/auth.interceptor';
+import { FundTransferComponent } from './components/fund-transfer/fund-transfer.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,8 @@ import {AuthInterceptor} from './services/auth.interceptor';
     DashboardComponent,
     NavBarComponent,
     DashboardDetailsComponent,
-    AccountDetailsComponent
+    AccountDetailsComponent,
+    FundTransferComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +43,10 @@ import {AuthInterceptor} from './services/auth.interceptor';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    HttpClientModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatStepperModule,
+    MatSelectModule
   ],
   providers: [[{provide: HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}]],
   bootstrap: [AppComponent]

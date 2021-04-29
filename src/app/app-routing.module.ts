@@ -5,6 +5,7 @@ import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DashboardDetailsComponent } from './components/dashboard-details/dashboard-details.component';
 import { AccountDetailsComponent } from './components/account-details/account-details.component';
+import { FundTransferComponent } from './components/fund-transfer/fund-transfer.component';
 
 import {AuthGuard} from './services/auth.guard';
 
@@ -31,6 +32,11 @@ const routes: Routes = [
 {
 	path:"banking/account/details/:id",
 	component:AccountDetailsComponent,
+	canActivate:[AuthGuard]
+},
+{
+	path:"banking/transfer/fund_transfer",
+	component:FundTransferComponent,
 	canActivate:[AuthGuard]
 }
 ];
