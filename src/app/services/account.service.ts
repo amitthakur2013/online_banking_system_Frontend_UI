@@ -36,4 +36,13 @@ private baseUrl="http://localhost:8080/banking/account";
   transferFund(data:Object): Observable<any> {
     return this.httpClient.post(`api/banking/transfer/fund_transfer`,data);
   }
+
+  getBeneficiaryDetails(id:number): Observable<any> {
+    return this.httpClient.get<any>(`api/banking/transfer/beneficiary_details/${id}`);
+  }
+
+  addBeneficiary(data:Object): Observable<any> {
+    return this.httpClient.post(`api/banking/transfer/beneficiary`,data);
+  }
+
 }

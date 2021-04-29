@@ -23,7 +23,16 @@ export class FundTransferComponent implements OnInit {
   accntList=[]
   benifList=[]
 
-  message="";
+  message={
+  category:"",
+  content:""
+  };
+
+  benifDetail={
+  name:"",
+  accountNo:0,
+  bankName:""
+  };
 
   constructor(private _formBuilder: FormBuilder, private accountService:AccountService) { }
 
@@ -70,6 +79,10 @@ export class FundTransferComponent implements OnInit {
 
   secondFormData(){
   	this.fullData.transPwd=this.secondFormGroup.value.transPwd;
+  	this.accountService.getBeneficiaryDetails(this.fullData.toBenifId).subscribe(data =>{
+  	this.benifDetail=data;
+  }, error => console.log(error));
+
    //console.log(this.fullData);
   
   }
@@ -78,9 +91,16 @@ export class FundTransferComponent implements OnInit {
   console.log(this.fullData);
 
   this.accountService.transferFund(this.fullData).subscribe(data =>{
-  	console.log(data);
-  }, error => console.log(error));
+  	
+  	this.message=data;
+  }, error => this.message=error,() => {
+  alert(this.message.content);
+  location.reload();
+  });
+  
+  }
 
+  cancelTransaction(){
   location.reload();
   }
 

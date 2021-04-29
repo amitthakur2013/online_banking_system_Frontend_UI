@@ -22,6 +22,10 @@ import {AuthInterceptor} from './services/auth.interceptor';
 import { FundTransferComponent } from './components/fund-transfer/fund-transfer.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSelectModule} from '@angular/material/select';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ManageBeneficiaryComponent } from './components/manage-beneficiary/manage-beneficiary.component';
+import {MatIconModule} from '@angular/material/icon';
+import { AddBeneficiaryComponent } from './components/add-beneficiary/add-beneficiary.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,9 @@ import {MatSelectModule} from '@angular/material/select';
     NavBarComponent,
     DashboardDetailsComponent,
     AccountDetailsComponent,
-    FundTransferComponent
+    FundTransferComponent,
+    ManageBeneficiaryComponent,
+    AddBeneficiaryComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +52,9 @@ import {MatSelectModule} from '@angular/material/select';
     ReactiveFormsModule,
     HttpClientModule,
     MatStepperModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule,
+    MatIconModule
   ],
   providers: [[{provide: HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}]],
   bootstrap: [AppComponent]

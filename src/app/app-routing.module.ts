@@ -6,6 +6,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DashboardDetailsComponent } from './components/dashboard-details/dashboard-details.component';
 import { AccountDetailsComponent } from './components/account-details/account-details.component';
 import { FundTransferComponent } from './components/fund-transfer/fund-transfer.component';
+import {ManageBeneficiaryComponent} from './components/manage-beneficiary/manage-beneficiary.component';
+import {AddBeneficiaryComponent} from './components/add-beneficiary/add-beneficiary.component';
 
 import {AuthGuard} from './services/auth.guard';
 
@@ -37,6 +39,16 @@ const routes: Routes = [
 {
 	path:"banking/transfer/fund_transfer",
 	component:FundTransferComponent,
+	canActivate:[AuthGuard]
+},
+{
+	path:"banking/transfer/manage_beneficiary",
+	component:ManageBeneficiaryComponent,
+	canActivate:[AuthGuard]
+},
+{
+	path:"banking/transfer/add_beneficiary",
+	component:AddBeneficiaryComponent,
 	canActivate:[AuthGuard]
 }
 ];
