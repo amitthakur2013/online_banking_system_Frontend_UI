@@ -23,7 +23,7 @@ export class DashboardDetailsComponent implements OnInit {
   	this.accountService.getUserDetails().subscribe(data => {
   		this.userdata=data.user;
   		this.accountsdata=data.accounts;
-  		console.log(data);
+  		//console.log(data);
   	}, error => console.warn(error));
   }
 
