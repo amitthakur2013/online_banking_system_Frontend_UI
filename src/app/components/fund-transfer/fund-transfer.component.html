@@ -52,11 +52,12 @@
   <mat-step>
     <ng-template matStepLabel>Transaction Summary</ng-template>
     <p><strong>From Account No : </strong> {{this.fullData.fromAccountNo}}</p>
-    <p><strong>To Benificiary : </strong> {{this.fullData.fromAccountNo}}</p>
+    <p><strong>To Benificiary : </strong> {{this.benifDetail.name}}- ( {{this.benifDetail.bankName}}- A/C- {{this.benifDetail.accountNo}} )</p>
     <p><strong>Amount : </strong> {{this.fullData.amount | currency:'INR'}}</p>
     <div>
       <button mat-raised-button color="primary" matStepperPrevious>Back</button>
       <button class="ml-2" mat-raised-button color="accent" (click)="finalSubmit()">Confirm and Proceed</button>
+      <button class="ml-2" mat-raised-button color="warn" (click)="cancelTransaction()">Cancel</button>
     </div>
   </mat-step>
 </mat-horizontal-stepper>

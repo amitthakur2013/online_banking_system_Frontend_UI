@@ -1,0 +1,41 @@
+<div class="container">
+<h1>
+    Create Beneficiary</h1>
+<br/>
+    <form (ngSubmit)="onSubmit()">
+
+        <div style="float:left;" class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" required [(ngModel)]="beneficiary.name" name="name">
+        </div>
+
+        <div style="float:left;" class="form-group ml-1">
+            <label for="name">Account number</label>
+            <input type="text" class="form-control" id="accno" required [(ngModel)]="beneficiary.accountNo" name="accno">
+        </div>
+        <div style="float:left;" class="form-group ml-1">
+            <label for="name">Bank Name</label>
+            <input type="text" class="form-control" id="bname" required [(ngModel)]="beneficiary.bankName" name="bname">
+        </div>
+
+        <div style="float:left;" class="form-group ml-1">
+            <label for="name">Branch Name</label>
+            <input type="text" class="form-control" id="branchname" required [(ngModel)]="beneficiary.branchName" name="branchname">
+        </div>
+
+        <div style="float:left;" class="form-group ml-1">
+            <label for="name">IFSC Code</label>
+            <input type="text" class="form-control" id="ifsccode" required [(ngModel)]="beneficiary.ifscCode" name="ifsccode">
+        </div>
+
+        <div style="float:left;" class="form-group ml-1">
+            <label for="name">NickName</label>
+            <input type="text" class="form-control" id="nickname" required [(ngModel)]="beneficiary.nickname" name="nickname">
+        </div>
+        <div style="float:right;" class="mr-5">
+            <br/>
+            <button type="submit" class="btn btn-md btn-success"> Submit</button>
+        </div>
+    </form>
+
+</div>
