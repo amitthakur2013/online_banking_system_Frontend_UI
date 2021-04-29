@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { AccountService } from '../../services/account.service';
 
 @Component({
   selector: 'app-fund-transfer',
@@ -19,9 +20,16 @@ export class FundTransferComponent implements OnInit {
   toBenifId:0
   }
 
-  constructor(private _formBuilder: FormBuilder) { }
+  accntList=[]
+  benifList=[]
+
+  message="";
+
+  constructor(private _formBuilder: FormBuilder, private accountService:AccountService) { }
 
   ngOnInit(): void {
+  	this.getAccountsList();
+  	this.getBeneficiaryList();
 
   	this.firstFormGroup = this._formBuilder.group({
       fromAccountNo: ['', Validators.required],
@@ -33,8 +41,22 @@ export class FundTransferComponent implements OnInit {
       transPwd: ['', Validators.required]
     });
 
-    console.log(this.firstFormGroup.value);
+    //console.log(this.firstFormGroup.value);
 
+  }
+
+  getAccountsList(){
+  	this.accountService.getAllAccounts().subscribe(data => {
+  		this.accntList=data;
+  		//console.log(this.accntList);
+  	}, error => console.warn(error));
+  }
+
+  getBeneficiaryList(){
+  	this.accountService.getAllBeneficiary().subscribe(data => {
+  		this.benifList=data;
+  		//console.log(this.benifList);
+  	}, error => console.warn(error));
   }
 
   firstFormData(){
@@ -43,7 +65,7 @@ export class FundTransferComponent implements OnInit {
   this.fullData.amount=parseFloat(this.firstFormGroup.value.amount);
   this.fullData.remark=this.firstFormGroup.value.remark;
 
-  //console.log(this.fullData);
+  //console.log(this.firstFormGroup.value);
   }
 
   secondFormData(){
@@ -54,6 +76,12 @@ export class FundTransferComponent implements OnInit {
 
   finalSubmit(){
   console.log(this.fullData);
+
+  this.accountService.transferFund(this.fullData).subscribe(data =>{
+  	console.log(data);
+  }, error => console.log(error));
+
+  location.reload();
   }
 
 }

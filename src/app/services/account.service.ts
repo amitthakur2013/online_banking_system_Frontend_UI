@@ -24,4 +24,16 @@ private baseUrl="http://localhost:8080/banking/account";
   	//return this.httpClient.get<any>(`${this.baseUrl}/mini_statement/${id}`);
   	return this.httpClient.get<any>(`api/banking/account/mini_statement/${id}`);
   }
+
+  getAllAccounts(): Observable<any> {
+    return this.httpClient.get<any>(`api/banking/account/account_list`);
+  }
+
+  getAllBeneficiary(): Observable<any> {
+    return this.httpClient.get<any>(`api/banking/transfer/beneficiary_list`);
+  }
+
+  transferFund(data:Object): Observable<any> {
+    return this.httpClient.post(`api/banking/transfer/fund_transfer`,data);
+  }
 }

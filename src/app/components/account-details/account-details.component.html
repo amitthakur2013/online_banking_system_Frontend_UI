@@ -14,6 +14,9 @@
 					<b>Operation Type : </b>{{ accountsinfo['operationType'] }}
 				</li><hr/>
 				<li>
+					<b>Balance : </b>{{ accountsinfo['balance'] | currency:'INR'}}
+				</li><hr/>
+				<li>
 					<b>Ifsc Code : </b>{{ accountsinfo['branch'].ifscCode }}
 				</li>
 
@@ -41,7 +44,7 @@
 						<td>{{ trans['refNo']}}</td>
 						<td>{{trans['createdOn']}}</td>
 						<td>{{trans['benificiary'].name}} Ac/No-{{trans['benificiary'].accountNo}}</td>
-						<td>{{trans['amount']}}</td>
+						<td>{{trans['amount'] | currency:'INR'}}</td>
 						<td>{{trans['remark']}}</td>
 						<td>{{trans['status']}}</td>
 					</tr>
