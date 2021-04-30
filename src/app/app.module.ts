@@ -26,6 +26,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { ManageBeneficiaryComponent } from './components/manage-beneficiary/manage-beneficiary.component';
 import {MatIconModule} from '@angular/material/icon';
 import { AddBeneficiaryComponent } from './components/add-beneficiary/add-beneficiary.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { AddBeneficiaryComponent } from './components/add-beneficiary/add-benefi
     MatStepperModule,
     MatSelectModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressSpinnerModule
   ],
   providers: [[{provide: HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}]],
   bootstrap: [AppComponent]

@@ -10,7 +10,7 @@ export class ManageBeneficiaryComponent implements OnInit {
 
   constructor(private accountService : AccountService) { }
 
-  benifList:[]
+  benifList=[]
 
   ngOnInit(): void {
   	this.getBeneficiaryList();
