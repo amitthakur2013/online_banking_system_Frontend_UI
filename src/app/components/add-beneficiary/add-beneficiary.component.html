@@ -1,41 +1,80 @@
-<div class="container">
-<h1>
-    Create Beneficiary</h1>
-<br/>
-    <form (ngSubmit)="onSubmit()">
 
-        <div style="float:left;" class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" required [(ngModel)]="beneficiary.name" name="name">
-        </div>
+<mat-horizontal-stepper linear #stepper>
+  <mat-step [stepControl]="firstFormGroup" [editable]="true">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Fill out Beneficiary details</ng-template>
 
-        <div style="float:left;" class="form-group ml-1">
-            <label for="name">Account number</label>
-            <input type="text" class="form-control" id="accno" required [(ngModel)]="beneficiary.accountNo" name="accno">
-        </div>
-        <div style="float:left;" class="form-group ml-1">
-            <label for="name">Bank Name</label>
-            <input type="text" class="form-control" id="bname" required [(ngModel)]="beneficiary.bankName" name="bname">
-        </div>
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" placeholder="Enter name" required>
+      </mat-form-field><br/>
 
-        <div style="float:left;" class="form-group ml-1">
-            <label for="name">Branch Name</label>
-            <input type="text" class="form-control" id="branchname" required [(ngModel)]="beneficiary.branchName" name="branchname">
-        </div>
+      <mat-form-field>
+        <mat-label>Account No</mat-label>
+        <input matInput formControlName="accountNo" placeholder="Enter ac no" required>
+      </mat-form-field><br/>
 
-        <div style="float:left;" class="form-group ml-1">
-            <label for="name">IFSC Code</label>
-            <input type="text" class="form-control" id="ifsccode" required [(ngModel)]="beneficiary.ifscCode" name="ifsccode">
-        </div>
+      <mat-form-field>
+        <mat-label>Bank Name</mat-label>
+        <input matInput formControlName="bankName" placeholder="Enter bank name" required>
+      </mat-form-field><br/>
 
-        <div style="float:left;" class="form-group ml-1">
-            <label for="name">NickName</label>
-            <input type="text" class="form-control" id="nickname" required [(ngModel)]="beneficiary.nickname" name="nickname">
-        </div>
-        <div style="float:right;" class="mr-5">
-            <br/>
-            <button type="submit" class="btn btn-md btn-success"> Submit</button>
-        </div>
+      <mat-form-field>
+        <mat-label>Branch Name</mat-label>
+        <input matInput formControlName="branchName" placeholder="Enter branch name" required>
+      </mat-form-field><br/>
+
+      <mat-form-field>
+        <mat-label>Ifsc Code</mat-label>
+        <input matInput formControlName="ifscCode" placeholder="Enter code" required>
+      </mat-form-field><br/>
+
+      <mat-form-field>
+        <mat-label>Nickname</mat-label>
+        <input matInput formControlName="nickname" placeholder="Enter nickname">
+      </mat-form-field><br/>
+      
+      <div>
+        <button mat-raised-button color="accent" matStepperNext (click)="firstFormData()">Proceed</button>
+      </div>
     </form>
+  </mat-step>
 
-</div>
+
+  <mat-step [stepControl]="secondFormGroup" [editable]="true">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Beneficiary Summary & Authentication</ng-template>
+        <div class="card container">
+            <h2 class="card-header">Beneficiary Details</h2>
+            <div class="card-body">
+                <p><b>Name : </b>{{fullData.name}}</p>
+                <p><b>Account No : </b>{{fullData.accountNo}}</p>
+                <p><b>Bank Name : </b>{{fullData.bankName}}</p>
+                <p><b>Branch Name : </b>{{fullData.branchName}}</p>
+                <p><b>IFSC Code : </b>{{fullData.ifscCode}}</p>
+                <p *ngIf="fullData.nickname.length"><b>Nicknane : </b>{{fullData.nickname}}</p>
+                
+            </div>
+        </div>
+      
+      <mat-form-field>
+        <mat-label>Enter your High Security Password</mat-label>
+        <input type="Password" matInput formControlName="transPwd" placeholder="" required>
+      </mat-form-field>
+
+      <div>
+        <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+        <button class="ml-2" mat-raised-button color="accent" matStepperNext (click)="secondFormData()">Confirm & Proceed</button>
+        <button class="ml-2" mat-raised-button color="warn" (click)="cancelTransaction()">Cancel</button>
+      </div>
+    </form>
+  </mat-step>
+
+
+  <mat-step>
+    <ng-template matStepLabel>Transaction Status</ng-template>
+    <h2>{{message}}</h2>
+    <button *ngIf="message == 'Invalid Password!' " class="ml-2" mat-raised-button color="accent" (click)="cancelTransaction()">Try Again</button>
+    <button class="ml-2" mat-raised-button color="primary"><a style="color: white;text-decoration: none" routerLink="/#banking/transfer/manage_beneficiary">View Beneficiary</a></button>
+  </mat-step>
+</mat-horizontal-stepper>
