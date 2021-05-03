@@ -25,7 +25,8 @@ export class FundTransferComponent implements OnInit {
 
   message={
   category:"",
-  content:""
+  content:"",
+  refNo:""
   };
 
   benifDetail={
