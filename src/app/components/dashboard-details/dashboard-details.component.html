@@ -1,9 +1,9 @@
 <div class="container">
 	<h2 class="text-center mt-2">Welcome, {{userdata['firstName']}}!</h2><br/>
-	<div class="row">
+	<div class="row mb-2">
 		<div class="col-md-6">
 			<div style="color:black" class="card container">
-			<h3 class="card card-header mt-2">Profile Details</h3><br/>
+			<h2 class="card card-header mt-2">Profile Details</h2><br/>
 			<ul style="padding: 20px;list-style-type: none;background-color: #fffcfa" class="card">
 				<li><b>Name: </b>{{userdata["firstName"]+" "+userdata["lastName"]}}</li><hr/>
 				<li><b>Address: </b>{{userdata['address']}}</li><hr/>
@@ -14,8 +14,8 @@
 			</div>
 		</div>
 		<div class="col-md-6">
-			<h2>Accounts</h2><br/>
-			<small>select your account for details</small>
+			
+			<!--<small>select your account for details</small>
 			<div class="row">
 				<div class="col-md-8 col-12">
 					<select [(ngModel)]="selectedLevel" (change)="selected()" class="form-control">
@@ -30,7 +30,22 @@
 				<div class="col-md-4 col-12">
 					<button id="act_detail_btn" disabled class="btn btn-md btn-success" (click)="getAccntDetails()">See Details</button>
 				</div>
+			</div>-->
+			<div class="container card" style="height: 100%">
+				<h2 class="card-header mt-2">Accounts Summary:-</h2>
+				<ul class="card-body mt-1" style="list-style-type: none">
+					<li *ngFor = "let account of accountsdata">
+						<div class="card container mb-2">
+							<p><b>Account No : </b><a routerLink="/#banking/account/details/{{account.id.acctNo}}">{{account.id.acctNo}}</a></p>
+							<p><b>Account Type : </b><span style="color: #793b87">{{account.acctType}}</span></p>
+							<p><b>Balance : </b><b style="color: #179410">{{account.balance | currency:'INR'}}</b></p>
+						</div>
+					</li>
+					
+				</ul>
 			</div>
+
+
 			
 		</div>
 	</div>
