@@ -13,9 +13,6 @@
 		  </mat-select>	
       </mat-form-field><br/>
       <mat-form-field>
-        <!--<mat-label>Remark</mat-label>
-        <input matInput formControlName="remark" placeholder="Remark(Optional)"> -->
-
         <mat-label>Select Beneficiary</mat-label>
 		  <mat-select formControlName="toBenifId">
 		     <mat-option *ngFor = "let beneficiary of benifList" value={{beneficiary.benifId.toString()}} >{{beneficiary.name}}</mat-option>
@@ -36,28 +33,34 @@
       </div>
     </form>
   </mat-step>
+
+
   <mat-step [stepControl]="secondFormGroup" [editable]="true">
     <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Authenticate your Transaction</ng-template>
+      <ng-template matStepLabel>Transaction Summary & Authentication</ng-template>
+      <p><strong>From Account No : </strong> {{this.fullData.fromAccountNo}}</p>
+      <p><strong>To Benificiary : </strong> {{this.benifDetail.name}}- ( {{this.benifDetail.bankName}}- A/C- {{this.benifDetail.accountNo}} )</p>
+      <p><strong>Amount : </strong> {{this.fullData.amount | currency:'INR'}}</p><br/>
+
       <mat-form-field>
         <mat-label>Enter your High Security Password</mat-label>
         <input type="Password" matInput formControlName="transPwd" placeholder="" required>
       </mat-form-field>
       <div>
         <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-        <button class="ml-2" mat-raised-button color="accent" matStepperNext (click)="secondFormData()">Proceed</button>
+        <button class="ml-2" mat-raised-button color="accent" matStepperNext (click)="secondFormData()">Confirm & Proceed</button>
+        <button class="ml-2" mat-raised-button color="warn" (click)="cancelTransaction()">Cancel</button>
       </div>
     </form>
   </mat-step>
+
+
   <mat-step>
-    <ng-template matStepLabel>Transaction Summary</ng-template>
-    <p><strong>From Account No : </strong> {{this.fullData.fromAccountNo}}</p>
-    <p><strong>To Benificiary : </strong> {{this.benifDetail.name}}- ( {{this.benifDetail.bankName}}- A/C- {{this.benifDetail.accountNo}} )</p>
-    <p><strong>Amount : </strong> {{this.fullData.amount | currency:'INR'}}</p>
+    <ng-template matStepLabel>Transaction Status</ng-template>
+    <h3>{{message.content}}</h3>
     <div>
-      <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-      <button class="ml-2" mat-raised-button color="accent" (click)="finalSubmit()">Confirm and Proceed</button>
-      <button class="ml-2" mat-raised-button color="warn" (click)="cancelTransaction()">Cancel</button>
+      <button *ngIf="message.category != 'success' " mat-raised-button color="primary" matStepperPrevious>Back</button>
+      <button class="ml-2" mat-raised-button color="primary" (click)="cancelTransaction()">Make Another Transaction</button>
     </div>
   </mat-step>
 </mat-horizontal-stepper>
