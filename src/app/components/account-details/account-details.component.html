@@ -22,7 +22,7 @@
 
 			</ul>
 		</div>
-		<div class="offset-md-1 col-md-8 col-12 card" style="color: black;border-radius: 0.25rem">
+		<div class="mt-1 col-md-9 col-12 card" style="color: black;border-radius: 0.25rem">
 			<h2 class="text-center mt-2 card-header">Mini Statement</h2>
 			<div *ngIf="!transinfo.length">
 				<hr/>
@@ -36,6 +36,7 @@
 						<th>To Benificiary</th>
 						<th>Amount</th>
 						<th>Remark</th>
+						<th>Avl. Bal</th>
 						<th>Status</th>
 					</tr>
 				</thead>
@@ -46,6 +47,7 @@
 						<td>{{trans['benificiary'].name}} Ac/No-{{trans['benificiary'].accountNo}}</td>
 						<td>{{trans['amount'] | currency:'INR'}}</td>
 						<td>{{trans['remark']}}</td>
+						<td>{{trans['availBal'] | currency:'INR'}}</td>
 						<td>{{trans['status']}}</td>
 					</tr>
 				</tbody>

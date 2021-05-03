@@ -32,7 +32,7 @@ export class DashboardDetailsComponent implements OnInit {
   }
 
   getAccntDetails(){
-  	this.router.navigate(['/banking/account/details',this.selectedLevel]);
+  	this.router.navigate(['#banking/account/details',this.selectedLevel]);
   }
 
 }

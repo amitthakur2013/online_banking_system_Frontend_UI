@@ -16,19 +16,19 @@
 	<a routerLinkActive="active" routerLink="" class="navbar-brand">Online Banking App</a>
   <ul class="navbar-nav ml-auto">
   	<li class="nav-item">
-      <a *ngIf="!loggedIn" routerLinkActive="active" routerLink="/banking/login" class="nav-link"> Login </a>
+      <a *ngIf="!loggedIn" routerLinkActive="active" routerLink="/#banking/login" class="nav-link"> Login </a>
     </li>
     <li class="nav-item">
-      <a *ngIf="loggedIn" routerLinkActive="active" routerLink="/banking/account/dashboard" class="nav-link"> Dashboard </a>
+      <a *ngIf="loggedIn" routerLinkActive="active" routerLink="/#banking/account/dashboard" class="nav-link"> Dashboard </a>
     </li>
     <li class="nav-item">
-      <a *ngIf="loggedIn" routerLinkActive="active" routerLink="/banking/transfer/add_beneficiary" class="nav-link"> Add Beneficiary </a>
+      <a *ngIf="loggedIn" routerLinkActive="active" routerLink="/#banking/transfer/add_beneficiary" class="nav-link"> Add Beneficiary </a>
     </li>
     <li class="nav-item">
-      <a *ngIf="loggedIn" routerLinkActive="active" routerLink="/banking/transfer/manage_beneficiary" class="nav-link"> Manage Beneficiary </a>
+      <a *ngIf="loggedIn" routerLinkActive="active" routerLink="/#banking/transfer/manage_beneficiary" class="nav-link"> Manage Beneficiary </a>
     </li>
     <li class="nav-item">
-      <a *ngIf="loggedIn" routerLinkActive="active" routerLink="/banking/transfer/fund_transfer" class="nav-link"> Fund Transfer </a>
+      <a *ngIf="loggedIn" routerLinkActive="active" routerLink="/#banking/transfer/fund_transfer" class="nav-link"> Fund Transfer </a>
     </li>
     <li class="nav-item">
       <a *ngIf="loggedIn" (click)="logoutUser()" routerLinkActive="inactive" routerLink="" class="nav-link"> Logout </a>
