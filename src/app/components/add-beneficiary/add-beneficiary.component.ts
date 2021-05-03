@@ -30,7 +30,7 @@ export class AddBeneficiaryComponent implements OnInit {
   } else {
 	  this.accountService.addBeneficiary(this.beneficiary).subscribe(data => {
 	  alert("Beneficiary Added Successfully");
-	  this.router.navigate(['/banking/transfer/manage_beneficiary']);
+	  this.router.navigate(['/#banking/transfer/manage_beneficiary']);
 	  },
 	  error=> console.log(error));
   	}

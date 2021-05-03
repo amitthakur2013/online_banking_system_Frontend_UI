@@ -24,5 +24,11 @@ export class ManageBeneficiaryComponent implements OnInit {
   	}, error => console.warn(error));
   }
 
+  deleteBenif(id:number){
+    this.accountService.deleteBeneficiary(id).subscribe( data => {
+    this.getBeneficiaryList();
+    }, error => console.warn(error));
+  }
+
 
 }
