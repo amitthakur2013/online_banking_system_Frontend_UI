@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../../services/account.service';
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {DialogboxComponent} from '../dialogbox/dialogbox.component';
 
 @Component({
   selector: 'app-manage-beneficiary',
@@ -8,9 +10,15 @@ import { AccountService } from '../../services/account.service';
 })
 export class ManageBeneficiaryComponent implements OnInit {
 
-  constructor(private accountService : AccountService) { }
+  constructor(private accountService : AccountService, private dialog: MatDialog) { }
 
   benifList=[]
+  deleteData={
+    benifId:"",
+    transPwd:""
+  }
+
+  message="";
 
   ngOnInit(): void {
   	this.getBeneficiaryList();
@@ -20,15 +28,47 @@ export class ManageBeneficiaryComponent implements OnInit {
   getBeneficiaryList(){
   	this.accountService.getAllBeneficiary().subscribe(data => {
   		this.benifList=data;
-  		//console.log(this.benifList);
   	}, error => console.warn(error));
   }
 
-  deleteBenif(id:number){
-    this.accountService.deleteBeneficiary(id).subscribe( data => {
-    this.getBeneficiaryList();
-    }, error => console.warn(error));
-  }
+  openDialog(id) {
+
+        this.deleteData.benifId=id;
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+
+        dialogConfig.data = {
+          benifId: id
+        };
+
+        this.dialog.open(DialogboxComponent, dialogConfig);
+
+        const dialogRef = this.dialog.open(DialogboxComponent, dialogConfig);
+
+        dialogRef.afterClosed().subscribe(
+            data => {
+              if(data){
+                if(data.transPwd.length){
+                  this.deleteData.transPwd=data.transPwd;
+                  this.accountService.deleteBeneficiary(this.deleteData).subscribe(data=>{
+                    this.message=data;
+                  }, error => {
+                    this.message=error;
+                  }, () => {
+                  alert(this.message);
+                  this.getBeneficiaryList();
+                  location.reload();
+                  });
+                  } else{
+                    alert("Empty Fields for trans pwd!");
+                  } 
+              } 
+            }); 
+
+
+    }
 
 
 }

@@ -28,6 +28,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { AddBeneficiaryComponent } from './components/add-beneficiary/add-beneficiary.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { UpdateBeneficiaryComponent } from './components/update-beneficiary/update-beneficiary.component';
+import { DialogboxComponent } from './components/dialogbox/dialogbox.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { UpdateBeneficiaryComponent } from './components/update-beneficiary/upda
     FundTransferComponent,
     ManageBeneficiaryComponent,
     AddBeneficiaryComponent,
-    UpdateBeneficiaryComponent
+    UpdateBeneficiaryComponent,
+    DialogboxComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +63,7 @@ import { UpdateBeneficiaryComponent } from './components/update-beneficiary/upda
     MatProgressSpinnerModule
   ],
   providers: [[{provide: HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}]],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogboxComponent]
 })
 export class AppModule { }

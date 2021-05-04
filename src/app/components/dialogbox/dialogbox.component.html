@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Confirmation & Authentication</h2>
+
+<mat-dialog-content [formGroup]="form">
+  
+    <mat-form-field>
+        <input matInput
+                placeholder="Enter High Security Password..."
+               formControlName="transPwd">
+    </mat-form-field>
+  
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button"(click)="close()">Close</button>
+    <button class="mat-raised-button mat-warn ml-1" (click)="save()">Confirm</button>
+</mat-dialog-actions>
