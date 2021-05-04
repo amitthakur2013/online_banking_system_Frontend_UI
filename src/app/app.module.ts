@@ -27,6 +27,7 @@ import { ManageBeneficiaryComponent } from './components/manage-beneficiary/mana
 import {MatIconModule} from '@angular/material/icon';
 import { AddBeneficiaryComponent } from './components/add-beneficiary/add-beneficiary.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { UpdateBeneficiaryComponent } from './components/update-beneficiary/update-beneficiary.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     AccountDetailsComponent,
     FundTransferComponent,
     ManageBeneficiaryComponent,
-    AddBeneficiaryComponent
+    AddBeneficiaryComponent,
+    UpdateBeneficiaryComponent
   ],
   imports: [
     BrowserModule,
