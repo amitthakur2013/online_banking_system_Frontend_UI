@@ -75,6 +75,7 @@
 
   <mat-step>
     <ng-template matStepLabel>Transaction Status</ng-template>
+    <mat-spinner *ngIf="!message.length"></mat-spinner><br/>
     <h2>{{message}}</h2>
     <button *ngIf="message == 'Invalid Password!' " class="ml-2" mat-raised-button color="accent" (click)="cancelTransaction()">Try Again</button>
     <button class="ml-2" mat-raised-button color="primary"><a style="color: white;text-decoration: none" routerLink="/#banking/transfer/manage_beneficiary">View Beneficiary</a></button>
