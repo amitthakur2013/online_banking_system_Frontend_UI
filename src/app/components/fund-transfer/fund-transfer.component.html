@@ -57,11 +57,14 @@
 
   <mat-step>
     <ng-template matStepLabel>Transaction Status</ng-template>
-    <h2 style="color: red" *ngIf="message.category != 'success'">FAILURE!</h2>
-    <h2 style="color: green" *ngIf="message.category == 'success'">SUCCESS!</h2>
-    <h3 style="font-weight: bold">{{message.content}}</h3><div *ngIf="message.category == 'success' ">
-    <h4><b>Transaction Reference No : </b>{{message.refNo}}</h4>
-    <small style="color: blue">*<i>This can be used for reference</i></small></div><br/>
+    <mat-spinner *ngIf="!message.category.length"></mat-spinner><br/>
+    <div *ngIf="message.category.length">
+      <h2 style="color: red" *ngIf="message.category != 'success'">FAILURE!</h2>
+      <h2 style="color: green" *ngIf="message.category == 'success'">SUCCESS!</h2>
+      <h3 style="font-weight: bold">{{message.content}}</h3><div *ngIf="message.category == 'success' ">
+      <h4><b>Transaction Reference No : </b>{{message.refNo}}</h4>
+      <small style="color: blue">*<i>This can be used for reference</i></small></div><br/>
+    </div>
     <div>
       <button *ngIf="message.category != 'success' " mat-raised-button color="primary" matStepperPrevious>Back</button>
       <button class="ml-2" mat-raised-button color="primary" (click)="cancelTransaction()">Make Another Transaction</button>
