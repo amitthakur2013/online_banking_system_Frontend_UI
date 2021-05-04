@@ -26,7 +26,8 @@
 						<td>{{beneficiary.branchName}}</td>
 						<td>{{beneficiary.ifscCode}}</td>
 						<td>{{beneficiary.accountNo}}</td>
-						<td><button mat-raised-button color="primary"><mat-icon>edit</mat-icon></button>
+						<td><a mat-raised-button color="primary" routerLink="/#banking/transfer/manage_beneficiary/{{beneficiary.benifId}}"><mat-icon>edit</mat-icon></a>
+							
 						<button class="ml-1" mat-raised-button color="warn" (click)="deleteBenif(beneficiary.benifId)"><mat-icon>delete</mat-icon></button>
 
 						</td>
