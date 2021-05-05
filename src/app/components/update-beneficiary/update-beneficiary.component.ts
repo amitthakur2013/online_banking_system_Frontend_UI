@@ -25,7 +25,9 @@ export class UpdateBeneficiaryComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
 
-  message=""
+  message="";
+
+  isEditable=true;
 
   constructor(private accountService : AccountService, private router:Router, private _formBuilder: FormBuilder,private route: ActivatedRoute) {
   	this.fullData.benifId=route.snapshot.params.id;
@@ -73,6 +75,9 @@ export class UpdateBeneficiaryComponent implements OnInit {
     	this.message=data;
     },error=>{
     	this.message=error;
+    },()=>{
+
+    this.isEditable=false;
     });
   
   }

@@ -1,61 +1,65 @@
 <span style="font-weight: bold;" class="ml-4">Create Beneficiary<span>
+
 <mat-horizontal-stepper linear #stepper>
-  <mat-step [stepControl]="firstFormGroup" [editable]="true">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Fill out Beneficiary details</ng-template>
+  <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
+    <div class="text-center">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Fill out Beneficiary details</ng-template>
 
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput formControlName="name" placeholder="Enter name" required>
-      </mat-form-field><br/>
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" placeholder="Enter name" required>
+        </mat-form-field><br/>
 
-      <mat-form-field>
-        <mat-label>Account No</mat-label>
-        <input matInput formControlName="accountNo" placeholder="Enter ac no" required>
-      </mat-form-field><br/>
+        <mat-form-field>
+          <mat-label>Account No</mat-label>
+          <input matInput formControlName="accountNo" placeholder="Enter ac no" required>
+        </mat-form-field><br/>
 
-      <mat-form-field>
-        <mat-label>Bank Name</mat-label>
-        <input matInput formControlName="bankName" placeholder="Enter bank name" required>
-      </mat-form-field><br/>
+        <mat-form-field>
+          <mat-label>Bank Name</mat-label>
+          <input matInput formControlName="bankName" placeholder="Enter bank name" required>
+        </mat-form-field><br/>
 
-      <mat-form-field>
-        <mat-label>Branch Name</mat-label>
-        <input matInput formControlName="branchName" placeholder="Enter branch name" required>
-      </mat-form-field><br/>
+        <mat-form-field>
+          <mat-label>Branch Name</mat-label>
+          <input matInput formControlName="branchName" placeholder="Enter branch name" required>
+        </mat-form-field><br/>
 
-      <mat-form-field>
-        <mat-label>Ifsc Code</mat-label>
-        <input matInput formControlName="ifscCode" placeholder="Enter code" required>
-      </mat-form-field><br/>
+        <mat-form-field>
+          <mat-label>Ifsc Code</mat-label>
+          <input matInput formControlName="ifscCode" placeholder="Enter code" required>
+        </mat-form-field><br/>
 
-      <mat-form-field>
-        <mat-label>Nickname</mat-label>
-        <input matInput formControlName="nickname" placeholder="Enter nickname">
-      </mat-form-field><br/>
-      
-      <div>
-        <button mat-raised-button color="accent" matStepperNext (click)="firstFormData()">Proceed</button>
-      </div>
-    </form>
+        <mat-form-field>
+          <mat-label>Nickname</mat-label>
+          <input matInput formControlName="nickname" placeholder="Enter nickname">
+        </mat-form-field><br/>
+        
+        <div>
+          <button mat-raised-button color="accent" matStepperNext (click)="firstFormData()">Proceed</button>
+        </div>
+      </form>
+    </div>
   </mat-step>
 
 
-  <mat-step [stepControl]="secondFormGroup" [editable]="true">
+  <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
+    <div class="text-center">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Beneficiary Summary & Authentication</ng-template>
-        <div class="card container">
+
+        <div class="p-2">
             <h2 class="card-header">Beneficiary Details</h2>
-            <div class="card-body">
-                <p><b>Name : </b>{{fullData.name}}</p>
-                <p><b>Account No : </b>{{fullData.accountNo}}</p>
-                <p><b>Bank Name : </b>{{fullData.bankName}}</p>
-                <p><b>Branch Name : </b>{{fullData.branchName}}</p>
-                <p><b>IFSC Code : </b>{{fullData.ifscCode}}</p>
-                <p *ngIf="fullData.nickname.length"><b>Nicknane : </b>{{fullData.nickname}}</p>
-                
+            <div style="text-align: left;margin-left: 41%;padding-left: 2%">
+                <p>Name : <span style="font-weight: lighter;">{{fullData.name}}</span></p>
+                <p>Account No : <span style="font-weight: lighter;">{{fullData.accountNo}}</span></p>
+                <p>Bank Name : <span style="font-weight: lighter;"> {{fullData.bankName}}</span></p>
+                <p>Branch Name : <span style="font-weight: lighter;"> {{fullData.branchName}}</span></p>
+                <p>IFSC Code :  <span style="font-weight: lighter;">{{fullData.ifscCode}}</span></p>
+                <p *ngIf="fullData.nickname.length">Nicknane :  <span style="font-weight: lighter;">{{fullData.nickname}}</span></p>
             </div>
-        </div>
+        
       
       <mat-form-field>
         <mat-label>Enter your High Security Password</mat-label>
@@ -67,15 +71,19 @@
         <button class="ml-2" mat-raised-button color="accent" matStepperNext (click)="secondFormData()">Confirm & Proceed</button>
         <button class="ml-2" mat-raised-button color="warn" (click)="cancelTransaction()">Cancel</button>
       </div>
+    </div>
     </form>
+  </div>
   </mat-step>
 
 
   <mat-step>
     <ng-template matStepLabel>Transaction Status</ng-template>
-    <mat-spinner *ngIf="!message.length"></mat-spinner><br/>
-    <h2>{{message}}</h2>
-    <button *ngIf="message == 'Invalid Password!' " class="ml-2" mat-raised-button color="accent" (click)="cancelTransaction()">Try Again</button>
-    <button class="ml-2" mat-raised-button color="primary"><a style="color: white;text-decoration: none" routerLink="/banking/transfer/manage_beneficiary">View Beneficiary</a></button>
+    <div class="text-center">
+      <mat-spinner *ngIf="!message.length" style="margin-left: 47%"></mat-spinner><br/>
+      <h2>{{message}}</h2>
+      <button *ngIf="message == 'Invalid Password!' " class="ml-2" mat-raised-button color="accent" (click)="cancelTransaction()">Try Again</button>
+      <button class="ml-2" mat-raised-button color="primary"><a style="color: white;text-decoration: none" routerLink="/banking/transfer/manage_beneficiary">View Beneficiary</a></button>
+    </div>
   </mat-step>
 </mat-horizontal-stepper>

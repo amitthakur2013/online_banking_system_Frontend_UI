@@ -25,6 +25,8 @@ export class AddBeneficiaryComponent implements OnInit {
 
   message=""
 
+  isEditable=true;
+
   constructor(private accountService : AccountService, private router:Router, private _formBuilder: FormBuilder ) { }
 
   ngOnInit(): void {
@@ -67,6 +69,7 @@ export class AddBeneficiaryComponent implements OnInit {
       },() => {
       //alert(this.message.content);
       //location.reload();
+      this.isEditable=false;
     });
   
   }

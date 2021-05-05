@@ -35,6 +35,8 @@ export class FundTransferComponent implements OnInit {
   bankName:""
   };
 
+  isEditable=true;
+
   constructor(private _formBuilder: FormBuilder, private accountService:AccountService) { }
 
   ngOnInit(): void {
@@ -89,6 +91,7 @@ export class FundTransferComponent implements OnInit {
     
     this.message=data;
     }, error => this.message=error,() => {
+    this.isEditable=false;
     //alert(this.message.content);
     //location.reload();
     });
