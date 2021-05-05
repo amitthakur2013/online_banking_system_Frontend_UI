@@ -36,7 +36,7 @@
 				<ul class="card-body mt-1" style="list-style-type: none">
 					<li *ngFor = "let account of accountsdata">
 						<div class="card container mb-2">
-							<p><b>Account No : </b><a routerLink="/#banking/account/details/{{account.id.acctNo}}">{{account.id.acctNo}}</a></p>
+							<p><b>Account No : </b><a routerLink="/banking/account/details/{{account.id.acctNo}}">{{account.id.acctNo}}</a></p>
 							<p><b>Account Type : </b><span style="color: #793b87">{{account.acctType}}</span></p>
 							<p><b>Balance : </b><b style="color: #179410">{{account.balance | currency:'INR'}}</b></p>
 						</div>

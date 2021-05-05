@@ -1,6 +1,6 @@
 <div class="container text-center">
 	<h2>Benficiary List</h2>
-	<a routerLink="/#banking/transfer/add_beneficiary" class="btn btn-md btn-info mb-2"> Add Beneficiary </a>
+	<a routerLink="/banking/transfer/add_beneficiary" class="btn btn-md btn-info mb-2"> Add Beneficiary </a>
 	<div *ngIf="!benifList.length" style="margin-left: 45%">
 		<mat-spinner></mat-spinner><br/>
 		<h1 style="margin-left: -75%!important">No Beneficiary Added Yet!</h1>
@@ -26,9 +26,11 @@
 						<td>{{beneficiary.branchName}}</td>
 						<td>{{beneficiary.ifscCode}}</td>
 						<td>{{beneficiary.accountNo}}</td>
-						<td><a mat-raised-button color="primary" routerLink="/#banking/transfer/manage_beneficiary/{{beneficiary.benifId}}"><mat-icon>edit</mat-icon></a>
+						<td>
+						<a mat-raised-button color="primary" routerLink="/banking/transfer/manage_beneficiary/{{beneficiary.benifId}}"><mat-icon>edit</mat-icon></a>
 							
 						<button class="ml-1" mat-raised-button color="warn" (click)="openDialog(beneficiary.benifId)"><mat-icon>delete</mat-icon></button>
+
 
 						</td>
 

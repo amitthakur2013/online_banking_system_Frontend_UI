@@ -19,36 +19,36 @@ const routes: Routes = [
 	pathMatch:'full'
 },
 {
-	path:"#banking/login",
+	path:"banking/login",
 	component:LoginComponent
 },
 {
-	path:"#banking/account/dashboard",
+	path:"banking/account/dashboard",
 	component:DashboardDetailsComponent,
 	canActivate:[AuthGuard]
 },
 {
-	path:"#banking/account/details/:id",
+	path:"banking/account/details/:id",
 	component:AccountDetailsComponent,
 	canActivate:[AuthGuard]
 },
 {
-	path:"#banking/transfer/fund_transfer",
+	path:"banking/transfer/fund_transfer",
 	component:FundTransferComponent,
 	canActivate:[AuthGuard]
 },
 {
-	path:"#banking/transfer/manage_beneficiary",
+	path:"banking/transfer/manage_beneficiary",
 	component:ManageBeneficiaryComponent,
 	canActivate:[AuthGuard]
 },
 {
-	path:"#banking/transfer/add_beneficiary",
+	path:"banking/transfer/add_beneficiary",
 	component:AddBeneficiaryComponent,
 	canActivate:[AuthGuard]
 },
 {
-	path:"#banking/transfer/manage_beneficiary/:id",
+	path:"banking/transfer/manage_beneficiary/:id",
 	component:UpdateBeneficiaryComponent,
 	canActivate:[AuthGuard]
 }
