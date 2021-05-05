@@ -11,16 +11,20 @@
            <mat-label>Select an Account</mat-label>
            
   		  <mat-select formControlName="fromAccountNo">
-          <mat-option *ngFor = "let account of accntList" value={{account.id.acctNo.toString()}} >{{account.acctType}}</mat-option>
+          <mat-option  *ngFor = "let account of accntList" value={{account.id.acctNo.toString()}} >{{account.acctType}}</mat-option>
   		  </mat-select>	
         </mat-form-field><br/>
-        <mat-form-field>
+        <mat-form-field *ngIf="benifList.length">
           <mat-label>Select Beneficiary</mat-label>
-  		  <mat-select formControlName="toBenifId">
-  		     <mat-option *ngFor = "let beneficiary of benifList" value={{beneficiary.benifId.toString()}} >{{beneficiary.name}}</mat-option>
-  		  </mat-select>	
+    		  <mat-select formControlName="toBenifId">
+    		     <mat-option *ngFor = "let beneficiary of benifList" value={{beneficiary.benifId.toString()}} >{{beneficiary.name}}</mat-option>
+    		  </mat-select>	
           
         </mat-form-field><br/>
+        <div *ngIf="!benifList.length">
+          <small style="color: red">No Beneficiary exists, Go & add</small><br/>
+          <a mat-raised-button color="primary" routerLink="/banking/transfer/add_beneficiary">Add Beneficiary</a>
+        </div><br/>
         <mat-form-field>
         <mat-label>Amount</mat-label>
           <input matInput formControlName="amount" placeholder="min amt 100" required>
