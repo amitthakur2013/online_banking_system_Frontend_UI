@@ -1,8 +1,8 @@
 <div class="bootstrap-wrapper">
-	<div class="container text-center mt">
+	<div class="container text-center mt-5">
 		<div class="row">
-			<div class="col-md-6 offset-md-3 card">
-				<h1 class="">
+			<div class="col-md-6 offset-md-3">
+				<h1 class="card-header">
 					Login
 
 					<!--Form-->
@@ -24,7 +24,7 @@
 
 							<div class="container text-center">
 								<button style="margin-right: 20px" type="submit" mat-raised-button color="primary">Login</button>
-								<button type="reset" mat-raised-button color="accent">Reset</button>
+								<button type="reset" mat-raised-button color="accent" (click)="clearError()">Reset</button>
 							</div>
 						</form>
 						<br/>

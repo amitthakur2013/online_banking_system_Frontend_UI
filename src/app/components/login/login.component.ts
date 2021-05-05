@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
+  this.errFields=false;
    if((this.credentials.username !="" && this.credentials.password!="") && (this.credentials.username!=null && this.credentials.password!=null)){
    	//console.log("We have to submit the form to server!");
 
@@ -48,8 +49,14 @@ export class LoginComponent implements OnInit {
 
    } else{
    this.errFields=true;
+   this.errUnauth=0;
    console.log("Fields are empty");
    }
+  }
+
+  clearError(){
+  this.errFields=false;
+  this.errUnauth=0;
   }
 
 }
