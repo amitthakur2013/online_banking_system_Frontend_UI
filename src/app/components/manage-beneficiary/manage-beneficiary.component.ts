@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../../services/account.service';
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {DialogboxComponent} from '../dialogbox/dialogbox.component';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-manage-beneficiary',
@@ -57,14 +58,27 @@ export class ManageBeneficiaryComponent implements OnInit {
                   }, error => {
                     this.message=error;
                   }, () => {
-                  alert(this.message);
+                  if(this.message=='Invalid Password!'){
+                    Swal.fire(
+                      {
+                        title: 'Status',
+                        text: this.message,
+                        icon: 'warning'
+                      }).then(result =>{} );
+                  } else {
+                    Swal.fire(
+                      {
+                        title: 'Status',
+                        text: this.message,
+                        icon: 'success'
+                      }).then(result =>{} );
+                  }
                   this.getBeneficiaryList();
-                  location.reload();
                   });
                   } else{
                     alert("Empty Fields for trans pwd!");
                   } 
-              } 
+              }
             }); 
 
 

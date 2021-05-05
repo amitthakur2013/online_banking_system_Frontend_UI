@@ -17,7 +17,7 @@ export class DialogboxComponent implements OnInit {
   benifId:""
   }
 
-  message="";
+  alreadyClicked=false;
 
   constructor(
   private accountService : AccountService,
@@ -38,7 +38,10 @@ export class DialogboxComponent implements OnInit {
    save() {
    		if(this.form.value.transPwd.length){
              this.dialogRef.close(this.form.value);
-   		}
+
+   		} else {
+      this.close();
+      }
 
     }
 

@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
    	this.loginService.loginUser(response['token']);
    	//window.location.href="/%23banking/account/dashboard";
     //location.reload();
-    this.router.navigate(['/#banking/account/dashboard']).then(() => {
+    this.router.navigate(['/banking/account/dashboard']).then(() => {
     window.location.reload();
      });
     this.errFields=false;
