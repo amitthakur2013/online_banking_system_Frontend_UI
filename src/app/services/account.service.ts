@@ -49,6 +49,10 @@ private baseUrl="http://localhost:8080/banking/account";
     return this.httpClient.post(`api/banking/transfer/manage_beneficiary`,data,{responseType: "text"});
   }
 
+  removeBeneficiary(id:number): Observable<any>{
+    return this.httpClient.delete(`api/banking/transfer/manage_beneficiary/${id}`,{responseType: "text"});
+  }
+
   updateBeneficiary(data:Object): Observable<any>{
     return this.httpClient.put(`api/banking/transfer/manage_beneficiary`,data,{responseType: "text"});
   }
