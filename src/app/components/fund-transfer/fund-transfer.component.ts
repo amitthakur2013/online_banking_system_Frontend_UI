@@ -76,11 +76,11 @@ export class FundTransferComponent implements OnInit {
   this.fullData.toBenifId=parseInt(this.firstFormGroup.value.toBenifId);
   this.fullData.amount=parseFloat(this.firstFormGroup.value.amount);
   this.fullData.remark=this.firstFormGroup.value.remark;
-  if(isNaN(this.firstFormGroup.value.toBenifId) ){
+  
     this.accountService.getBeneficiaryDetails(this.fullData.toBenifId).subscribe(data =>{
       this.benifDetail=data;
     }, error => console.log(error));
-  }
+  
 
   //console.log(this.firstFormGroup.value);
   }
