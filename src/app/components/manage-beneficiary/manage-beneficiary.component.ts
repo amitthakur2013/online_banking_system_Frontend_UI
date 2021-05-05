@@ -32,7 +32,41 @@ export class ManageBeneficiaryComponent implements OnInit {
   	}, error => console.warn(error));
   }
 
-  openDialog(id) {
+  removeBenif(id){
+      Swal.fire({
+          title: 'Are you sure?',
+          text: 'You will not be able to recover it',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, delete it!',
+          cancelButtonText: 'No, keep it'
+        }).then((result) => {
+          if (result.value) {
+
+          this.accountService.removeBeneficiary(id).subscribe(data=>{
+            this.getBeneficiaryList();
+            Swal.fire(
+              'Deleted!',
+              'Beneficiary Deleted Successfully!',
+              'success'
+            )
+          },error=>{
+            Swal.fire(
+              'Cancelled',
+              'Something went wrong! :(',
+              'error'
+            )
+          },()=>{
+          
+          })
+            
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
+            
+          }
+        })
+  }
+
+  /*openDialog(id) {
 
         this.deleteData.benifId=id;
         const dialogConfig = new MatDialogConfig();
@@ -82,7 +116,9 @@ export class ManageBeneficiaryComponent implements OnInit {
             }); 
 
 
-    }
+    }*/
+
+
 
 
 }
