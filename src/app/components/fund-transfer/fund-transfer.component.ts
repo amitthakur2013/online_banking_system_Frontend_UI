@@ -59,8 +59,8 @@ export class FundTransferComponent implements OnInit {
 
   getAccountsList(){
   	this.accountService.getAllAccounts().subscribe(data => {
-  		this.accntList=data;
-  		//console.log(this.accntList);
+  		this.accntList=data.filter(account => account.acctType !== 'fixed deposit');
+  		//console.log(data);
   	}, error => console.warn(error));
   }
 
@@ -76,9 +76,11 @@ export class FundTransferComponent implements OnInit {
   this.fullData.toBenifId=parseInt(this.firstFormGroup.value.toBenifId);
   this.fullData.amount=parseFloat(this.firstFormGroup.value.amount);
   this.fullData.remark=this.firstFormGroup.value.remark;
-  this.accountService.getBeneficiaryDetails(this.fullData.toBenifId).subscribe(data =>{
-    this.benifDetail=data;
-  }, error => console.log(error));
+  if(isNaN(this.firstFormGroup.value.toBenifId) ){
+    this.accountService.getBeneficiaryDetails(this.fullData.toBenifId).subscribe(data =>{
+      this.benifDetail=data;
+    }, error => console.log(error));
+  }
 
   //console.log(this.firstFormGroup.value);
   }
@@ -86,12 +88,12 @@ export class FundTransferComponent implements OnInit {
   secondFormData(){
   	this.fullData.transPwd=this.secondFormGroup.value.transPwd;
    //console.log(this.fullData);
-
+   this.isEditable=false;
    this.accountService.transferFund(this.fullData).subscribe(data =>{
     
     this.message=data;
     }, error => this.message=error,() => {
-    this.isEditable=false;
+    
     //alert(this.message.content);
     //location.reload();
     });
