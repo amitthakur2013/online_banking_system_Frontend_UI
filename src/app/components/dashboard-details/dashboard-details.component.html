@@ -1,5 +1,5 @@
 <div class="container">
-	<h2 class="text-center mt-2">Welcome, {{userdata['firstName']}}!</h2><br/>
+	<h2 style="background-color: #87a7ff" class="text-center mt-2 card-header">Welcome, {{userdata['firstName']}}! :)</h2><br/>
 	<div class="row mb-2">
 		<div class="col-md-6">
 			<div style="color:black" class="card container">
@@ -31,7 +31,7 @@
 					<button id="act_detail_btn" disabled class="btn btn-md btn-success" (click)="getAccntDetails()">See Details</button>
 				</div>
 			</div>-->
-			<div class="container card" style="height: 100%">
+			<div class="container card" style="height: 94%">
 				<h2 class="card-header mt-2">Accounts Summary</h2>
 				<ul class="card-body mt-1" style="list-style-type: none">
 					<li *ngFor = "let account of accountsdata">
