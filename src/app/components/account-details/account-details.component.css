@@ -9,3 +9,9 @@
 	list-style-type: none;
 	
 }
+
+.icon-mini-text{
+	position: absolute;
+	margin-left:1px;
+	margin-top: -3px;
+}
