@@ -16,40 +16,64 @@ const routes: Routes = [
 {
 	path:"",
 	component:HomeComponent,
-	pathMatch:'full'
+	pathMatch:'full',
+	data : {  
+      title: 'Online Banking Portal-Home'  
+  }  
 },
 {
 	path:"banking/login",
-	component:LoginComponent
+	component:LoginComponent,
+	data : {  
+      title: 'Online Banking Portal-Login'  
+  }  
 },
 {
 	path:"banking/account/dashboard",
 	component:DashboardDetailsComponent,
+	data : {  
+      title: 'Online Banking Portal-Dashboard'  
+  }  ,
 	canActivate:[AuthGuard]
 },
 {
 	path:"banking/account/details/:id",
 	component:AccountDetailsComponent,
+	data : {  
+      title: 'Online Banking Portal-Account Info'  
+  }  ,
 	canActivate:[AuthGuard]
 },
 {
 	path:"banking/transfer/fund_transfer",
 	component:FundTransferComponent,
+	data : {  
+      title: 'Online Banking Portal-Fund Transfer'  
+  }  ,
 	canActivate:[AuthGuard]
 },
 {
 	path:"banking/transfer/manage_beneficiary",
 	component:ManageBeneficiaryComponent,
+	data : {  
+      title: 'Online Banking Portal-Manage Beneficiary'  
+  }  ,
 	canActivate:[AuthGuard]
 },
 {
 	path:"banking/transfer/manage_beneficiary/add",
 	component:AddBeneficiaryComponent,
+	data : {  
+      title: 'Online Banking Portal-Add Beneficiary'  
+  }  ,
 	canActivate:[AuthGuard]
 },
 {
 	path:"banking/transfer/manage_beneficiary/:id",
 	component:UpdateBeneficiaryComponent,
+	data : {  
+      title: 'Online Banking Portal-Update Beneficiary'  
+  }  ,
 	canActivate:[AuthGuard]
 }
 ];
