@@ -1,3 +1,8 @@
 .example-spacer{
 	flex: 1 1 auto;
 }
+
+
+.card2{
+	box-shadow: 0px 0px 5px #888888;
+}
