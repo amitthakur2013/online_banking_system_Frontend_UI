@@ -42,7 +42,7 @@ export class ManageBeneficiaryComponent implements OnInit {
           cancelButtonText: 'No, keep it'
         }).then((result) => {
           if (result.value) {
-
+          this.benifList=[];
           this.accountService.removeBeneficiary(id).subscribe(data=>{
             this.getBeneficiaryList();
             Swal.fire(
