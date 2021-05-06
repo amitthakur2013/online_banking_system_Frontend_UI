@@ -83,7 +83,7 @@ export class UpdateBeneficiaryComponent implements OnInit {
   }
 
   cancelTransaction(){
-  location.reload();
+  this.router.navigate(['/banking/transfer/manage_beneficiary']);
   }
 
 }
