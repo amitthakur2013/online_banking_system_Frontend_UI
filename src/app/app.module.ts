@@ -30,6 +30,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { UpdateBeneficiaryComponent } from './components/update-beneficiary/update-beneficiary.component';
 import { DialogboxComponent } from './components/dialogbox/dialogbox.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { Title} from '@angular/platform-browser';  
 
 @NgModule({
   declarations: [
@@ -63,7 +64,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     MatIconModule,
     MatProgressSpinnerModule
   ],
-  providers: [[{provide: HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}],{provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [[{provide: HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}],{provide: LocationStrategy, useClass: HashLocationStrategy},[Title]],
   bootstrap: [AppComponent],
   entryComponents: [DialogboxComponent]
 })
