@@ -43,7 +43,7 @@ const routes: Routes = [
 	canActivate:[AuthGuard]
 },
 {
-	path:"banking/transfer/add_beneficiary",
+	path:"banking/transfer/manage_beneficiary/add",
 	component:AddBeneficiaryComponent,
 	canActivate:[AuthGuard]
 },

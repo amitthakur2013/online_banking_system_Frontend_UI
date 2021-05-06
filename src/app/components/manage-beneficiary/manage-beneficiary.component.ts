@@ -42,7 +42,16 @@ export class ManageBeneficiaryComponent implements OnInit {
           cancelButtonText: 'No, keep it'
         }).then((result) => {
           if (result.value) {
-          this.benifList=[];
+           Swal.fire({
+                title: 'Please Wait !',
+                html: 'Delete in progress!',// add html attribute if you want or remove
+                allowOutsideClick: false,
+                showCancelButton: false,
+                showConfirmButton: false,
+                onBeforeOpen: () => {
+                    Swal.showLoading()
+                },
+            });
           this.accountService.removeBeneficiary(id).subscribe(data=>{
             this.getBeneficiaryList();
             Swal.fire(
