@@ -1,25 +1,22 @@
 
 <nav class="navbar navbar-expand-sm bg-primary navbar-dark" >
-	<a *ngIf="!loggedIn" routerLinkActive="active" routerLink="" class="navbar-brand">Online Banking App</a>
-  <a *ngIf="loggedIn" routerLinkActive="active" routerLink="/banking/account/dashboard" class="navbar-brand">Online Banking App</a>
+	<a *ngIf="!loggedIn" routerLinkActive="active" routerLink="" class="navbar-brand"><i class="fas fa-globe"></i>nline Banking Portal</a>
+  <a *ngIf="loggedIn" routerLinkActive="active" routerLink="/banking/account/dashboard" class="navbar-brand"><i class="fas fa-globe"></i>nline Banking Portal</a>
   <ul class="navbar-nav ml-auto">
   	<li class="nav-item">
-      <a *ngIf="!loggedIn" routerLinkActive="active" routerLink="/banking/login" class="nav-link"> Login </a>
+      <a *ngIf="!loggedIn" routerLinkActive="active" routerLink="/banking/login" class="nav-link"><i class="fas fa-sign-in-alt"></i> Login </a>
     </li>
     <li class="nav-item">
-      <a *ngIf="loggedIn" routerLinkActive="active" routerLink="/banking/account/dashboard" class="nav-link"> Dashboard </a>
-    </li>
-    <!--<li class="nav-item">
-      <a *ngIf="loggedIn" routerLinkActive="active" routerLink="/#banking/transfer/add_beneficiary" class="nav-link"> Add Beneficiary </a>
-    </li>-->
-    <li class="nav-item">
-      <a *ngIf="loggedIn" routerLinkActive="active" routerLink="/banking/transfer/manage_beneficiary" class="nav-link"> Manage Beneficiary </a>
+      <a *ngIf="loggedIn" routerLinkActive="active" routerLink="/banking/account/dashboard" class="nav-link"><i class="fas fa-user-tie"></i> Dashboard </a>
     </li>
     <li class="nav-item">
-      <a *ngIf="loggedIn" routerLinkActive="active" routerLink="/banking/transfer/fund_transfer" class="nav-link"> Fund Transfer </a>
+      <a *ngIf="loggedIn" routerLinkActive="active" routerLink="/banking/transfer/manage_beneficiary" class="nav-link"><i class="fas fa-edit"></i> Manage Beneficiary </a>
     </li>
     <li class="nav-item">
-      <a *ngIf="loggedIn" (click)="logoutUser()" routerLinkActive="inactive" routerLink="" class="nav-link"> Logout </a>
+      <a *ngIf="loggedIn" routerLinkActive="active" routerLink="/banking/transfer/fund_transfer" class="nav-link"><i class="fas fa-wallet"></i> Fund Transfer </a>
+    </li>
+    <li class="nav-item">
+      <a *ngIf="loggedIn" (click)="logoutUser()" routerLinkActive="inactive" routerLink="" class="nav-link"><i class="fas fa-sign-out-alt"></i> Logout </a>
     </li>
     
   </ul>
