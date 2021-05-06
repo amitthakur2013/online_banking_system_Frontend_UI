@@ -36,6 +36,9 @@ export class FundTransferComponent implements OnInit {
   };
 
   isEditable=true;
+  isEditable1=true;
+  isEditable2=false;
+
 
   constructor(private _formBuilder: FormBuilder, private accountService:AccountService) { }
 
@@ -76,7 +79,7 @@ export class FundTransferComponent implements OnInit {
   this.fullData.toBenifId=parseInt(this.firstFormGroup.value.toBenifId);
   this.fullData.amount=parseFloat(this.firstFormGroup.value.amount);
   this.fullData.remark=this.firstFormGroup.value.remark;
-  
+  this.isEditable2=true;
     this.accountService.getBeneficiaryDetails(this.fullData.toBenifId).subscribe(data =>{
       this.benifDetail=data;
     }, error => console.log(error));
@@ -89,6 +92,8 @@ export class FundTransferComponent implements OnInit {
   	this.fullData.transPwd=this.secondFormGroup.value.transPwd;
    //console.log(this.fullData);
    this.isEditable=false;
+   this.isEditable1=false;
+   this.isEditable2=false;
    this.accountService.transferFund(this.fullData).subscribe(data =>{
     
     this.message=data;

@@ -1,55 +1,61 @@
-<span style="font-weight: bold;" class="ml-4">Fund Transfer</span>
-
-<mat-horizontal-stepper linear #stepper>
+<div class="container mt-2">
+<h2 class="card-header text-center card3 heading-page">Fund Transfer</h2>
+<mat-horizontal-stepper linear #stepper style="margin-top: -15px">
   <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
     <div class="text-center">
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>Fill out Transaction details</ng-template>
-        <mat-form-field>
-          <!--<mat-label>Name</mat-label>
-          <input matInput formControlName="name" placeholder="Last name, First name" required> -->
-           <mat-label>Select an Account</mat-label>
-           
-  		  <mat-select formControlName="fromAccountNo">
-          <mat-option  *ngFor = "let account of accntList" value={{account.id.acctNo.toString()}} >{{account.acctType}}</mat-option>
-  		  </mat-select>	
-        </mat-form-field><br/>
-        <mat-form-field *ngIf="benifList.length">
-          <mat-label>Select Beneficiary</mat-label>
-    		  <mat-select formControlName="toBenifId">
-    		     <mat-option *ngFor = "let beneficiary of benifList" value={{beneficiary.benifId.toString()}} >{{beneficiary.name}}</mat-option>
+        <div class="card2 text-center">
+          <h2 class="text-center card3 card-header mt-1">Fill the Details</h2>
+          <mat-form-field>
+            <!--<mat-label>Name</mat-label>
+            <input matInput formControlName="name" placeholder="Last name, First name" required> -->
+             <mat-label>Select an Account</mat-label>
+             
+    		  <mat-select formControlName="fromAccountNo">
+            <mat-option  *ngFor = "let account of accntList" value={{account.id.acctNo.toString()}} >{{account.acctType}}</mat-option>
     		  </mat-select>	
+          </mat-form-field><br/>
+          <mat-form-field *ngIf="benifList.length">
+            <mat-label>Select Beneficiary</mat-label>
+      		  <mat-select formControlName="toBenifId">
+      		     <mat-option *ngFor = "let beneficiary of benifList" value={{beneficiary.benifId.toString()}} >{{beneficiary.name}}</mat-option>
+      		  </mat-select>	
+            
+          </mat-form-field><br/>
+          <div *ngIf="!benifList.length">
+            <small style="color: red">No Beneficiary exists, Go & add</small><br/>
+            <a mat-raised-button color="primary" routerLink="/banking/transfer/add_beneficiary">Add Beneficiary</a>
+          </div><br/>
+          <mat-form-field>
+          <mat-label>Amount</mat-label>
+            <input matInput formControlName="amount" placeholder="min amt 100" required>
+          </mat-form-field><br/>
+          <mat-form-field>
+          <mat-label>Remark(optional)</mat-label>
+            <input matInput formControlName="remark" placeholder="" >
+          </mat-form-field>
           
-        </mat-form-field><br/>
-        <div *ngIf="!benifList.length">
-          <small style="color: red">No Beneficiary exists, Go & add</small><br/>
-          <a mat-raised-button color="primary" routerLink="/banking/transfer/add_beneficiary">Add Beneficiary</a>
-        </div><br/>
-        <mat-form-field>
-        <mat-label>Amount</mat-label>
-          <input matInput formControlName="amount" placeholder="min amt 100" required>
-        </mat-form-field><br/>
-        <mat-form-field>
-        <mat-label>Remark(optional)</mat-label>
-          <input matInput formControlName="remark" placeholder="" >
-        </mat-form-field>
-        
-        <div>
-          <button mat-raised-button color="accent" matStepperNext (click)="firstFormData()">Proceed</button>
-        </div>
+          <div>
+            <button mat-raised-button color="accent" matStepperNext (click)="firstFormData()">Proceed</button>
+          </div>
+      </div>
       </form>
     </div>
   </mat-step>
 
 
   <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
-    <div class="text-center">
+    <div class="text-center mb-5">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Transaction Summary & Authentication</ng-template><br/>
-      <div style="text-align: left;padding-left: 2%;margin-left: 41%">
-        <p><strong>From Account No : </strong> {{this.fullData.fromAccountNo}}</p>
-        <p><strong>To Benificiary : </strong> {{this.benifDetail.name}}- ( {{this.benifDetail.bankName}}- A/C- {{this.benifDetail.accountNo}} )</p>
-        <p><strong>Amount : </strong> {{this.fullData.amount | currency:'INR'}}</p><br/>
+      <div style="margin-bottom: 1%" class="card2 text-center">
+        <div style="text-align: left;padding-left: 2%;">
+          <h2 class="text-center card-header card3">Transaction Details</h2>
+          <p><strong>From Account No : </strong> {{this.fullData.fromAccountNo}}</p>
+          <p><strong>To Benificiary : </strong> {{this.benifDetail.name}}- ( {{this.benifDetail.bankName}}- A/C- {{this.benifDetail.accountNo}} )</p>
+          <p><strong>Amount : </strong> {{this.fullData.amount | currency:'INR'}}</p><br/>
+        </div>
       </div>
       <mat-form-field>
         <mat-label>Enter your High Security Password</mat-label>
@@ -67,8 +73,8 @@
 
   <mat-step>
     <ng-template matStepLabel>Transaction Status</ng-template>
-    <div class="text-center">
-    <mat-spinner *ngIf="!message.category.length" style="margin-left: 47%"></mat-spinner><br/>
+    <div class="text-center card2">
+    <mat-spinner *ngIf="!message.category.length" style="margin-left: 42%"></mat-spinner><br/>
     <div *ngIf="message.category.length">
       <h2 style="color: red" *ngIf="message.category != 'success'">FAILURE!</h2>
       <h2 style="color: green" *ngIf="message.category == 'success'">SUCCESS!</h2>
@@ -82,3 +88,4 @@
   </div>
   </mat-step>
 </mat-horizontal-stepper>
+</div>

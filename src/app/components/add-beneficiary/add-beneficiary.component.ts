@@ -46,6 +46,8 @@ export class AddBeneficiaryComponent implements OnInit {
 
   }
 
+  
+
   firstFormData(){
     this.fullData.name=this.firstFormGroup.value.name;
     this.fullData.accountNo=this.firstFormGroup.value.accountNo;

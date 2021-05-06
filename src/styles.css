@@ -29,6 +29,7 @@ footer{
 	background-color: grey;
 	text-align: center;
 	color: white;
+	margin-top: 50%;
 }
 
 
@@ -36,3 +37,12 @@ a {
  	text-decoration: none!important;
  }
 
+.mat-step-header {
+  pointer-events: none !important;
+}
+
+
+.heading-page{
+background-color: #87a7ff!important;
+color:white!important;
+}
