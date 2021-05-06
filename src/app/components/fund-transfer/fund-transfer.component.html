@@ -6,7 +6,7 @@
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>Fill out Transaction details</ng-template>
         <div class="card2 text-center">
-          <h2 class="text-center card3 card-header mt-1">Fill the Details</h2>
+          <h2 class="text-center card3 card-header">Fill the Details</h2>
           <mat-form-field>
             <!--<mat-label>Name</mat-label>
             <input matInput formControlName="name" placeholder="Last name, First name" required> -->
@@ -25,7 +25,7 @@
           </mat-form-field><br/>
           <div *ngIf="!benifList.length">
             <small style="color: red">No Beneficiary exists, Go & add</small><br/>
-            <a mat-raised-button color="primary" routerLink="/banking/transfer/add_beneficiary">Add Beneficiary</a>
+            <a mat-raised-button color="primary" routerLink="/banking/transfer/manage_beneficiary/add">Add Beneficiary</a>
           </div><br/>
           <mat-form-field>
           <mat-label>Amount</mat-label>
