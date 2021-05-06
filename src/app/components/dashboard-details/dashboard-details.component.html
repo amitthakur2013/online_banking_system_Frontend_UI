@@ -3,7 +3,7 @@
 	<div class="row mb-2">
 		<div class="col-md-6">
 			<div style="color:black" class="container">
-			<h2 class="card card2 card-header mt-2"><i class="far fa-address-card"></i><span class="icon-text-pos">Profile Details</span></h2><br/>
+			<h2 class="card card2 card-header"><i class="far fa-address-card"></i><span class="icon-text-pos">Profile Details</span></h2><br/>
 			<ul *ngIf="userdata" style="padding: 20px;list-style-type: none;" class="card card2">
 				<li><b>Name : </b>{{userdata["firstName"]+" "+userdata["lastName"]}}</li><hr/>
 				<li><b>Address : </b>{{userdata['address']}}</li><hr/>
@@ -31,13 +31,13 @@
 				</div>
 			</div>-->
 			<div class="container" style="height: 93%">
-				<ul class="card-body" style="list-style-type: none;margin-top: -12px">
+				<ul class="card-body" style="list-style-type: none;margin-top: -20px">
 					<h2 class="card-header card2 mb-2"><i class="fas fa-landmark"></i> Accounts Summary</h2>
 					<li *ngFor = "let account of accountsdata">
 						<div style="padding:5px 0 0 10px;" class="card card2 container mb-2">
 							<p><b>Account No : </b><a routerLink="/banking/account/details/{{account.id.acctNo}}">{{account.id.acctNo}}</a></p>
 							<p><b>Account Type : </b><span style="color: #793b87">{{account.acctType.toUpperCase()}}</span></p>
-							<p><b>Balance : </b><b style="color: #179410">{{account.balance | currency:'INR'}}</b></p>
+							<p><b>Balance : </b><b style="color: black">{{account.balance | currency:'INR'}}</b></p>
 						</div>
 					</li>
 					
