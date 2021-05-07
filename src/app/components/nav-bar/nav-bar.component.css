@@ -19,3 +19,9 @@
 a:hover{
 	cursor: pointer;
 }
+
+nav {
+	position: sticky;
+	top: 0;
+	z-index: 9999;
+}
