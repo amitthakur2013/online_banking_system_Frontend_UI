@@ -42,7 +42,7 @@ export class ManageBeneficiaryComponent implements OnInit {
           cancelButtonText: 'No, keep it'
         }).then((result) => {
           if (result.value) {
-           Swal.fire({
+           /*Swal.fire({
                 title: 'Please Wait !',
                 html: 'Delete in progress!',// add html attribute if you want or remove
                 allowOutsideClick: false,
@@ -51,7 +51,7 @@ export class ManageBeneficiaryComponent implements OnInit {
                 onBeforeOpen: () => {
                     Swal.showLoading()
                 },
-            });
+            });*/
           this.accountService.removeBeneficiary(id).subscribe(data=>{
             this.getBeneficiaryList();
             Swal.fire(
