@@ -9,11 +9,27 @@
     <li class="nav-item">
       <a *ngIf="loggedIn" routerLinkActive="active" routerLink="/banking/account/dashboard" class="nav-link"><i class="fas fa-user-tie"></i> Dashboard </a>
     </li>
-    <li class="nav-item">
-      <a *ngIf="loggedIn" routerLinkActive="active" routerLink="/banking/transfer/manage_beneficiary" class="nav-link"><i class="fas fa-edit"></i> Manage Beneficiary </a>
+    <li *ngIf="loggedIn" class="nav-item">
+      <div class="dropdown" routerLinkActive="active">
+        <a routerLinkActive="active" type="button"  class="nav-link dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-exchange-alt"></i> Transfer
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a *ngIf="loggedIn" routerLinkActive="active" routerLink="/banking/transfer/manage_beneficiary" class="dropdown-item"><i class="fas fa-edit"></i> Manage Beneficiary </a>
+          <a *ngIf="loggedIn" routerLinkActive="active" routerLink="/banking/transfer/fund_transfer" class="dropdown-item"><i class="fas fa-wallet"></i> Fund Transfer </a>
+        </div>
+      </div>
     </li>
-    <li class="nav-item">
-      <a *ngIf="loggedIn" routerLinkActive="active" routerLink="/banking/transfer/fund_transfer" class="nav-link"><i class="fas fa-wallet"></i> Fund Transfer </a>
+    <li *ngIf="loggedIn" class="nav-item">
+      <div class="dropdown" routerLinkActive="inactive">
+        <a routerLinkActive="active" type="button"  class="nav-link dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-money-check"></i> Payments
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a *ngIf="loggedIn" routerLinkActive="inactive" routerLink="" class="dropdown-item"><i class="fas fa-edit"></i> Register Merchant </a>
+          <a *ngIf="loggedIn" routerLinkActive="inactive" routerLink="" class="dropdown-item"><i class="fas fa-wallet"></i> Pay Merchant </a>
+        </div>
+      </div>
     </li>
     <li class="nav-item">
       <a *ngIf="loggedIn" (click)="logoutUser()" routerLinkActive="inactive" routerLink="" class="nav-link"><i class="fas fa-sign-out-alt"></i> Logout </a>
