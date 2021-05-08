@@ -8,8 +8,14 @@ import {Router} from '@angular/router';
   styleUrls: ['./dashboard-details.component.css']
 })
 export class DashboardDetailsComponent implements OnInit {
-	userdata:Object;
-	accountsdata:[];
+	userdata={
+  firstName:"",
+  lastName:"",
+  address:"",
+  email:"",
+  phoneNo:"",
+  };
+	accountsdata=[];
 	selectedLevel;
 	setEnable:true;
 

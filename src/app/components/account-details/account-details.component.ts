@@ -10,8 +10,16 @@ import {Router,ActivatedRoute} from '@angular/router';
 
 export class AccountDetailsComponent implements OnInit {
 
-  accountsinfo:Object;
+  accountsinfo={
+  id:{acctNo:""},
+  acctType:"",
+  operationType:"",
+  balance:"",
+  branch:{ifscCode:""}
+  };
+
   transinfo=[];
+  
   id:number;
 
   constructor(private accountService : AccountService, private route:ActivatedRoute) { }
