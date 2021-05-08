@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { AccountService } from '../../services/account.service';
+import * as CryptoJS from 'crypto-js';  
+import {AesUtil} from '../../utilities/securitymech';
 
 @Component({
   selector: 'app-fund-transfer',
@@ -36,9 +38,8 @@ export class FundTransferComponent implements OnInit {
   };
 
   isEditable=true;
-  isEditable1=true;
-  isEditable2=false;
 
+  aesUtil=new AesUtil(128, 1000);
 
   constructor(private _formBuilder: FormBuilder, private accountService:AccountService) { }
 
@@ -79,21 +80,33 @@ export class FundTransferComponent implements OnInit {
   this.fullData.toBenifId=parseInt(this.firstFormGroup.value.toBenifId);
   this.fullData.amount=parseFloat(this.firstFormGroup.value.amount);
   this.fullData.remark=this.firstFormGroup.value.remark;
-  this.isEditable2=true;
+  
     this.accountService.getBeneficiaryDetails(this.fullData.toBenifId).subscribe(data =>{
       this.benifDetail=data;
     }, error => console.log(error));
   
 
   //console.log(this.firstFormGroup.value);
+
+  var div =  document.querySelector('#initial_head');
+  var div2= document.querySelector('.poscent');
+  div.classList.remove('checkheader');
+  div2.classList.remove('poscent');
   }
 
   secondFormData(){
-  	this.fullData.transPwd=this.secondFormGroup.value.transPwd;
-   //console.log(this.fullData);
-   this.isEditable=false;
-   this.isEditable1=false;
-   this.isEditable2=false;
+
+    var iv = CryptoJS.lib.WordArray.random(128/8).toString(CryptoJS.enc.Hex);
+    var salt = CryptoJS.lib.WordArray.random(128/8).toString(CryptoJS.enc.Hex);
+
+    var ciphertext = this.aesUtil.encrypt(salt, iv,"thisissecret", this.secondFormGroup.value.transPwd.trim());
+    var aesPassword = (iv + "::" + salt + "::" + ciphertext);
+    var pwd = btoa(aesPassword);
+  	this.fullData.transPwd=pwd;
+
+    //console.log(this.fullData);
+    this.isEditable=false;
+   
    this.accountService.transferFund(this.fullData).subscribe(data =>{
     
     this.message=data;

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../../services/account.service';
 import { ActivatedRoute,Router } from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import * as CryptoJS from 'crypto-js';  
+import {AesUtil} from '../../utilities/securitymech';
 
 @Component({
   selector: 'app-update-beneficiary',
@@ -28,6 +30,8 @@ export class UpdateBeneficiaryComponent implements OnInit {
   message="";
 
   isEditable=true;
+
+  aesUtil=new AesUtil(128, 1000);
 
   constructor(private accountService : AccountService, private router:Router, private _formBuilder: FormBuilder,private route: ActivatedRoute) {
   	this.fullData.benifId=route.snapshot.params.id;
@@ -67,10 +71,25 @@ export class UpdateBeneficiaryComponent implements OnInit {
     this.fullData.nickname=this.firstFormGroup.value.nickname;
 
     //console.log(this.firstFormGroup.value);
+
+    var div =  document.querySelector('#initial_head');
+    var div2= document.querySelector('.poscent');
+    div.classList.remove('checkheader');
+    div2.classList.remove('poscent');
   }
 
   secondFormData(){
-    this.fullData.transPwd=this.secondFormGroup.value.transPwd;
+  
+    var iv = CryptoJS.lib.WordArray.random(128/8).toString(CryptoJS.enc.Hex);
+    var salt = CryptoJS.lib.WordArray.random(128/8).toString(CryptoJS.enc.Hex);
+
+    var ciphertext = this.aesUtil.encrypt(salt, iv,"thisissecret", this.secondFormGroup.value.transPwd.trim());
+    var aesPassword = (iv + "::" + salt + "::" + ciphertext);
+    var pwd = btoa(aesPassword);
+    this.fullData.transPwd=pwd;
+
+    console.log(this.fullData);
+
     this.accountService.updateBeneficiary(this.fullData).subscribe(data=>{
     	this.message=data;
     },error=>{
