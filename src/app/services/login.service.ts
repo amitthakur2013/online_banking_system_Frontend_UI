@@ -9,6 +9,12 @@ export class LoginService {
   url="http://localhost:8080";
   constructor(private http:HttpClient) { }
 
+
+  // calling for key and iv
+  generateKey(){
+  return this.http.get(`api/key`);
+  }
+
 // calling the server to generate token
 
 generateToken(credentials:any){

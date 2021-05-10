@@ -4,6 +4,7 @@ import { ActivatedRoute,Router } from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import * as CryptoJS from 'crypto-js';  
 import {AesUtil} from '../../utilities/securitymech';
+import {LoginService} from '../../services/login.service';
 
 @Component({
   selector: 'app-update-beneficiary',
@@ -31,9 +32,9 @@ export class UpdateBeneficiaryComponent implements OnInit {
 
   isEditable=true;
 
-  aesUtil=new AesUtil(128, 1000);
+  aesUtil=new AesUtil();
 
-  constructor(private accountService : AccountService, private router:Router, private _formBuilder: FormBuilder,private route: ActivatedRoute) {
+  constructor(private accountService : AccountService, private router:Router, private _formBuilder: FormBuilder,private route: ActivatedRoute, private loginService:LoginService) {
   	this.fullData.benifId=route.snapshot.params.id;
   	this.accountService.getBeneficiaryDetails(parseInt(this.fullData.benifId)).subscribe( data => {
   		this.fullData=data;
@@ -79,25 +80,28 @@ export class UpdateBeneficiaryComponent implements OnInit {
   }
 
   secondFormData(){
-  
-    var iv = CryptoJS.lib.WordArray.random(128/8).toString(CryptoJS.enc.Hex);
-    var salt = CryptoJS.lib.WordArray.random(128/8).toString(CryptoJS.enc.Hex);
 
-    var ciphertext = this.aesUtil.encrypt(salt, iv,"thisissecret", this.secondFormGroup.value.transPwd.trim());
-    var aesPassword = (iv + "::" + salt + "::" + ciphertext);
-    var pwd = btoa(aesPassword);
-    this.fullData.transPwd=pwd;
+    this.loginService.generateKey().subscribe(data=>{
+      var iv=data['iv'];
+      var k=data['key'];
+      var ciphertext = this.aesUtil.encrypt(iv,k,this.secondFormGroup.value.transPwd.trim());
+      this.fullData.transPwd=ciphertext;
 
-    console.log(this.fullData);
-
-    this.accountService.updateBeneficiary(this.fullData).subscribe(data=>{
-    	this.message=data;
+      this.accountService.updateBeneficiary(this.fullData).subscribe(data=>{
+      this.message=data;
     },error=>{
-    	this.message=error;
+      this.message=error;
     },()=>{
 
     this.isEditable=false;
     });
+      
+    },
+    error =>{ console.log(error) });
+
+
+  
+    //this.fullData.transPwd=this.secondFormGroup.value.transPwd.trim();
   
   }
 
