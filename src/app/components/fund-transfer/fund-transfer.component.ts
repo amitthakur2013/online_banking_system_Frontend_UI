@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { AccountService } from '../../services/account.service';
 import * as CryptoJS from 'crypto-js';  
 import {AesUtil} from '../../utilities/securitymech';
+import {LoginService} from '../../services/login.service';
 
 @Component({
   selector: 'app-fund-transfer',
@@ -39,9 +40,9 @@ export class FundTransferComponent implements OnInit {
 
   isEditable=true;
 
-  aesUtil=new AesUtil(128, 1000);
+  aesUtil=new AesUtil();
 
-  constructor(private _formBuilder: FormBuilder, private accountService:AccountService) { }
+  constructor(private _formBuilder: FormBuilder, private accountService:AccountService,private loginService:LoginService) { }
 
   ngOnInit(): void {
   	this.getAccountsList();
@@ -96,25 +97,25 @@ export class FundTransferComponent implements OnInit {
 
   secondFormData(){
 
-    var iv = CryptoJS.lib.WordArray.random(128/8).toString(CryptoJS.enc.Hex);
-    var salt = CryptoJS.lib.WordArray.random(128/8).toString(CryptoJS.enc.Hex);
+    this.loginService.generateKey().subscribe(data=>{
+      var iv=data['iv'];
+      var k=data['key'];
+      var ciphertext = this.aesUtil.encrypt(iv,k,this.secondFormGroup.value.transPwd.trim());
+      this.fullData.transPwd=ciphertext;
 
-    var ciphertext = this.aesUtil.encrypt(salt, iv,"thisissecret", this.secondFormGroup.value.transPwd.trim());
-    var aesPassword = (iv + "::" + salt + "::" + ciphertext);
-    var pwd = btoa(aesPassword);
-  	this.fullData.transPwd=pwd;
+      this.accountService.transferFund(this.fullData).subscribe(data =>{
+    
+      this.message=data;
+      }, error => this.message=error,() => {
+      });
+      
+    },
+    error =>{ console.log(error) });
 
-    //console.log(this.fullData);
+  	//this.fullData.transPwd=this.secondFormGroup.value.transPwd.trim();
+    
     this.isEditable=false;
    
-   this.accountService.transferFund(this.fullData).subscribe(data =>{
-    
-    this.message=data;
-    }, error => this.message=error,() => {
-    
-    //alert(this.message.content);
-    //location.reload();
-    });
   
   }
 

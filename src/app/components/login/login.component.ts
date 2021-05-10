@@ -11,7 +11,7 @@ import {AesUtil} from '../../utilities/securitymech';
 })
 export class LoginComponent implements OnInit {
 
-  aesUtil=new AesUtil(128, 1000);
+  aesUtil=new AesUtil();
 	
 	credentials={
 	username:"",
@@ -25,44 +25,42 @@ export class LoginComponent implements OnInit {
   constructor(private loginService:LoginService, private router:Router ) { }
 
   ngOnInit(): void {
-    //console.log(CryptoJS.AES.encrypt('my message', 'secret key').toString());
   
   }
 
-  onSubmit(){
+  onFinalSubmit(){
     this.errFields=false;
    if((this.credentials.username !="" && this.credentials.password!="") && (this.credentials.username!=null && this.credentials.password!=null)){
-   	
-    var iv = CryptoJS.lib.WordArray.random(128/8).toString(CryptoJS.enc.Hex);
-    var salt = CryptoJS.lib.WordArray.random(128/8).toString(CryptoJS.enc.Hex);
+  
+    this.loginService.generateKey().subscribe(data=>{
+      var iv=data['iv'];
+      var k=data['key'];
+      var ciphertext = this.aesUtil.encrypt(iv,k,this.credentials.password.trim());
+      this.credentials.password=ciphertext;
 
-    var ciphertext = this.aesUtil.encrypt(salt, iv,"thisissecret", this.credentials.password.trim());
-    var aesPassword = (iv + "::" + salt + "::" + ciphertext);
-    var pwd = btoa(aesPassword);
-    this.credentials.password=pwd;
-    //console.log(this.credentials);
+      // token generate
+      this.loginService.generateToken(this.credentials).subscribe(response => {
+        //console.log(response);
+        this.loginService.loginUser(response['token']);
+        this.router.navigate(['/banking/account/dashboard']).then(() => {
+          window.location.reload();
+         });
+        this.errFields=false;
+        this.errUnauth=0;
 
-   	// token generate
-   	this.loginService.generateToken(this.credentials).subscribe(response => {
-   	
-   	//console.log(response);
-   	this.loginService.loginUser(response['token']);
-    this.router.navigate(['/banking/account/dashboard']).then(() => {
-    window.location.reload();
-     });
-    this.errFields=false;
-    this.errUnauth=0;
-
-   	},error => {
-   	this.errUnauth=error.status;
-   	console.log(error);
-   	});
+      },error => {
+        this.errUnauth=error.status;
+        console.log(error);
+      });
+      
+      },
+      error =>{ console.log(error) });
+    
 
 
    } else{
-   this.errFields=true;
-   this.errUnauth=0;
-   console.log("Fields are empty");
+     this.errFields=true;
+     this.errUnauth=0;
    }
   }
 
