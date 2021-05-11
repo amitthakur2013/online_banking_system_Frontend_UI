@@ -32,7 +32,9 @@ import { DialogboxComponent } from './components/dialogbox/dialogbox.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { Title} from '@angular/platform-browser';
 import { LoaderComponent } from './components/loader/loader.component'; 
-import { LoaderService } from './services/loader.service'; 
+import { LoaderService } from './services/loader.service';
+import { AddBillerComponent } from './components/add-biller/add-biller.component';
+import { ManageBillerComponent } from './components/manage-biller/manage-biller.component'; 
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { LoaderService } from './services/loader.service';
     AddBeneficiaryComponent,
     UpdateBeneficiaryComponent,
     DialogboxComponent,
-    LoaderComponent
+    LoaderComponent,
+    AddBillerComponent,
+    ManageBillerComponent
   ],
   imports: [
     BrowserModule,

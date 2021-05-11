@@ -21,13 +21,13 @@
       </div>
     </li>
     <li *ngIf="loggedIn" class="nav-item">
-      <div class="dropdown" routerLinkActive="inactive">
+      <div class="dropdown" routerLinkActive="active">
         <a routerLinkActive="active" type="button"  class="nav-link dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-money-check"></i> Payments
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a *ngIf="loggedIn" routerLinkActive="inactive" routerLink="" class="dropdown-item"><i class="fas fa-edit"></i> Register Merchant </a>
-          <a *ngIf="loggedIn" routerLinkActive="inactive" routerLink="" class="dropdown-item"><i class="fas fa-wallet"></i> Pay Merchant </a>
+          <a *ngIf="loggedIn" routerLinkActive="active" routerLink="/banking/payments/manage_biller" class="dropdown-item"><i class="fas fa-edit"></i> Register Biller </a>
+          <a *ngIf="loggedIn" routerLinkActive="inactive" routerLink="/banking/payments/manage_biller" class="dropdown-item"><i class="fas fa-wallet"></i> Pay Merchant </a>
         </div>
       </div>
     </li>
