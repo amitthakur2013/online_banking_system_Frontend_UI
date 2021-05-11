@@ -9,6 +9,8 @@ import { FundTransferComponent } from './components/fund-transfer/fund-transfer.
 import {ManageBeneficiaryComponent} from './components/manage-beneficiary/manage-beneficiary.component';
 import {AddBeneficiaryComponent} from './components/add-beneficiary/add-beneficiary.component';
 import { UpdateBeneficiaryComponent } from './components/update-beneficiary/update-beneficiary.component';
+import { AddBillerComponent } from './components/add-biller/add-biller.component';
+import { ManageBillerComponent } from './components/manage-biller/manage-biller.component';
 
 import {AuthGuard} from './services/auth.guard';
 
@@ -73,6 +75,22 @@ const routes: Routes = [
 	component:UpdateBeneficiaryComponent,
 	data : {  
       title: 'Online Banking Portal-Update Beneficiary'  
+  }  ,
+	canActivate:[AuthGuard]
+},
+{
+	path:"banking/payments/manage_biller/add",
+	component:AddBillerComponent,
+	data : {  
+      title: 'Online Banking Portal-Add Biller'  
+  }  ,
+	canActivate:[AuthGuard]
+},
+{
+	path:"banking/payments/manage_biller",
+	component:ManageBillerComponent,
+	data : {  
+      title: 'Online Banking Portal-Manage Biller'  
   }  ,
 	canActivate:[AuthGuard]
 }

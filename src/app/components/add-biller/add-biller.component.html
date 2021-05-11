@@ -1,0 +1,48 @@
+<div class="container mt-2">
+	<h2 class="card-header text-center heading-page card3">Add Biller</h2>
+
+	<div class="text-center">
+		<form [formGroup]="firstFormGroup" (ngSubmit)="onSubmit()">
+			<div class="card2 text-center">
+				<h2 class="text-center card3 card-header">Fill the Details</h2>
+				<mat-form-field>
+             		<mat-label>Select Category</mat-label>
+    		  		<mat-select formControlName="selectedCat" (selectionChange)="callVendors()">
+        				<mat-option  *ngFor = "let category of cat" value={{category.toString()}} >{{category}}</mat-option>
+    		  		</mat-select>	
+    		  		
+          		</mat-form-field><br/>
+          		<div *ngIf="vendorList.length">
+          			<mat-form-field>
+	             		<mat-label>Select Merchant/Company</mat-label>
+	    		  		<mat-select formControlName="vendorId">
+	        				<mat-option  *ngFor = "let vendor of vendorList" value={{vendor.vendorId}} >{{vendor.vcompName}}</mat-option>
+	    		  		</mat-select>	
+          			</mat-form-field><br/>
+          			<div *ngIf="firstFormGroup.value.vendorId.length" >
+	          			<mat-form-field *ngIf="firstFormGroup.value.selectedCat=='Mobile_Recharge'">
+				          	<mat-label>Mobile No</mat-label>
+				            <input matInput formControlName="mobNo" placeholder="" pattern="^[0-9]{10}$">
+				        </mat-form-field>
+
+				        <mat-form-field *ngIf="firstFormGroup.value.selectedCat=='Insurance'">
+				          	<mat-label>Premium No</mat-label>
+				            <input matInput formControlName="premiumNo" placeholder="" >
+				        </mat-form-field>
+
+				        <mat-form-field *ngIf="firstFormGroup.value.selectedCat=='Electric_Bill'">
+				          	<mat-label>Electric Bill No</mat-label>
+				            <input matInput formControlName="electricbillNo" placeholder="" >
+				        </mat-form-field>
+				        <div class="text-center">
+				        	<button  mat-raised-button color="primary" type="submit">Save Biller</button>
+				    	</div>
+			    	</div>
+          		</div>
+			</div>
+		</form>
+		
+
+	</div>
+	
+</div>
