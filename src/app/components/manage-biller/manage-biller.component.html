@@ -1,1 +1,39 @@
-<p>manage-biller works!</p>
+<div class="container text-center mt-2">
+	<h2 style="background-color: #87a7ff;color:white" class="card-header card2">Your Billers</h2>
+	<a routerLink="/banking/payments/manage_biller/add" class="btn btn-md btn-info mb-2"> Add Biller </a>
+	<div *ngIf="!billers.length" style="margin-left: 45%">
+		<h1 style="margin-left: -75%!important">No Biller Added Yet!</h1>
+	</div>
+
+	<div  class="row text-center mt-1">
+		
+		<table *ngIf="billers.length" class="table table-striped card2">
+			<thead>
+					<tr>
+						<th>Unique Id/Mob No</th>
+						<th>Bill Category</th>
+						<th>Bill Merchant</th>
+						<th>Actions</th>
+						
+					</tr>
+			</thead>
+			<tbody>
+					<tr *ngFor = "let biller of billers">
+						<td>{{biller.mobNo}}{{biller.premiumNo}}{{biller.electricbillNo}}</td>
+						<td>{{biller.vendor.category}}</td>
+						<td>{{biller.vendor.vcompName}}</td>
+						<td>
+						<a mat-raised-button color="primary" routerLink=""><mat-icon>edit</mat-icon></a>
+							
+						<button class="ml-1" mat-raised-button color="warn" (click)="removeBiller(biller.billerId)"><mat-icon>delete</mat-icon></button>
+
+
+						</td>
+
+						
+					</tr>
+				</tbody>
+		</table>
+	</div>
+	
+</div>

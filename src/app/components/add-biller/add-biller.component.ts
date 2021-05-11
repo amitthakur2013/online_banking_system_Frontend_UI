@@ -21,7 +21,6 @@ export class AddBillerComponent implements OnInit {
 	  mobNo:"",
 	  premiumNo:"",
 	  electricbillNo:"",
-	  vendorId:""
   };
 
   toggle=false;
@@ -57,13 +56,12 @@ export class AddBillerComponent implements OnInit {
   	this.biller.mobNo=this.firstFormGroup.value.mobNo;
   	this.biller.premiumNo=this.firstFormGroup.value.premiumNo;
   	this.biller.electricbillNo=this.firstFormGroup.value.electricbillNo;
-  	this.biller.vendorId=this.firstFormGroup.value.vendorId;
 
-  	console.log(this.biller);
-  	this.billerService.addBiller(this.biller).subscribe(data=>{
+  	//console.log(this.biller);
+  	this.billerService.addBiller(this.biller,this.firstFormGroup.value.vendorId).subscribe(data=>{
   	Swal.fire(
               'Status!',
-              'Beneficiary Added Successfully!',
+              'Biller Added Successfully!',
               'success'
             )
     this.ngOnInit();
