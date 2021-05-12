@@ -28,4 +28,8 @@ export class BillerService {
   deleteBiller(id):Observable<any>{
   	return this.httpClient.delete(`api/banking/payments/biller/${id}`,{responseType: "text"});
   }
+
+  makebillPayment(data:Object):Observable<any>{
+    return this.httpClient.post(`api/banking/payments/pay_bill`,data);
+  }
 } 

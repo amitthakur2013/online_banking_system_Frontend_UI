@@ -34,7 +34,8 @@ import { Title} from '@angular/platform-browser';
 import { LoaderComponent } from './components/loader/loader.component'; 
 import { LoaderService } from './services/loader.service';
 import { AddBillerComponent } from './components/add-biller/add-biller.component';
-import { ManageBillerComponent } from './components/manage-biller/manage-biller.component'; 
+import { ManageBillerComponent } from './components/manage-biller/manage-biller.component';
+import { BillPaymentComponent } from './components/bill-payment/bill-payment.component'; 
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { ManageBillerComponent } from './components/manage-biller/manage-biller.
     DialogboxComponent,
     LoaderComponent,
     AddBillerComponent,
-    ManageBillerComponent
+    ManageBillerComponent,
+    BillPaymentComponent
   ],
   imports: [
     BrowserModule,
