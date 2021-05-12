@@ -9,6 +9,7 @@
 		<table *ngIf="benifList.length" class="table table-striped card2">
 				<thead>
 					<tr>
+						<th>Sl/No</th>
 						<th>Name</th>
 						<th>Bank Name</th>
 						<th>Branch Name</th>
@@ -19,7 +20,8 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr *ngFor = "let beneficiary of benifList">
+					<tr *ngFor = "let beneficiary of benifList; let i=index">
+						<td>{{i+1}}</td>
 						<td>{{beneficiary.name}}</td>
 						<td>{{beneficiary.bankName}}</td>
 						<td>{{beneficiary.branchName}}</td>

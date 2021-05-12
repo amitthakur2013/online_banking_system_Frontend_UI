@@ -35,7 +35,8 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { LoaderService } from './services/loader.service';
 import { AddBillerComponent } from './components/add-biller/add-biller.component';
 import { ManageBillerComponent } from './components/manage-biller/manage-biller.component';
-import { BillPaymentComponent } from './components/bill-payment/bill-payment.component'; 
+import { BillPaymentComponent } from './components/bill-payment/bill-payment.component';
+import { UpdateBillerComponent } from './components/update-biller/update-biller.component'; 
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { BillPaymentComponent } from './components/bill-payment/bill-payment.com
     LoaderComponent,
     AddBillerComponent,
     ManageBillerComponent,
-    BillPaymentComponent
+    BillPaymentComponent,
+    UpdateBillerComponent
   ],
   imports: [
     BrowserModule,

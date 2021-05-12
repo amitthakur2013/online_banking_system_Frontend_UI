@@ -32,4 +32,16 @@ export class BillerService {
   makebillPayment(data:Object):Observable<any>{
     return this.httpClient.post(`api/banking/payments/pay_bill`,data);
   }
+
+  getBillerDetails(id):Observable<any>{
+    return this.httpClient.get<any>(`api/banking/payments/biller/${id}`);
+  }
+
+  updateBiller(biller:Object):Observable<any>{
+    return this.httpClient.put(`api/banking/payments/biller`,biller,{responseType: "text"});
+  }
+
+  authenticateBiller(transPwd:Object):Observable<any>{
+    return this.httpClient.post(`api/banking/payments/authenticate`,transPwd,{responseType: "text"});
+  }
 } 
