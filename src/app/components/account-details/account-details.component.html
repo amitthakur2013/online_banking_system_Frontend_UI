@@ -45,7 +45,8 @@
 					<tr *ngFor = "let trans of transinfo">
 						<td>{{ trans['refNo']}}</td>
 						<td>{{trans['createdOn']}}</td>
-						<td>{{trans['benificiary'].name}} Ac/No-{{trans['benificiary'].accountNo}}</td>
+						<td *ngIf="trans['trans_type']=='Fund_Transfer'">{{trans['benificiary'].name}} Ac/No-{{trans['benificiary'].accountNo}}</td>
+						<td *ngIf="trans['trans_type']=='Bill_Payment'">{{trans['biller']}}</td>
 						<td>{{trans['amount'] | currency:'INR'}}</td>
 						<td>{{trans['remark']}}</td>
 						<td>{{trans['availBal'] | currency:'INR'}}</td>
