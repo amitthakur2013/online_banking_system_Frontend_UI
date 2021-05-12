@@ -21,6 +21,7 @@ export class AddBillerComponent implements OnInit {
 	  mobNo:"",
 	  premiumNo:"",
 	  electricbillNo:"",
+    transPwd:""
   };
 
   toggle=false;
@@ -57,15 +58,36 @@ export class AddBillerComponent implements OnInit {
   	this.biller.premiumNo=this.firstFormGroup.value.premiumNo;
   	this.biller.electricbillNo=this.firstFormGroup.value.electricbillNo;
 
-  	//console.log(this.biller);
-  	this.billerService.addBiller(this.biller,this.firstFormGroup.value.vendorId).subscribe(data=>{
-  	Swal.fire(
+    Swal.fire({
+    title: "Authentication!",
+    text: "Enter Your High Security Password:",
+    input: 'password',
+    showCancelButton: true        
+    }).then((result) => {
+        if (result.value) {
+            this.biller.transPwd=result.value.trim();
+            this.billerService.addBiller(this.biller,this.firstFormGroup.value.vendorId).subscribe(data=>{
+            if(data !== "Invalid Password!"){
+              Swal.fire(
+                        'Status!',
+                        'Biller Added Successfully!',
+                        'success'
+                      )
+            } else {
+              Swal.fire(
               'Status!',
-              'Biller Added Successfully!',
-              'success'
+              data,
+              'warning'
             )
-    this.ngOnInit();
-  	},error => console.log(error));
+            }
+            this.ngOnInit();
+            },error => console.log(error));
+            
+        }
+    });
+
+
+
   	
   }
   

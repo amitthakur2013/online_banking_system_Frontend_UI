@@ -10,6 +10,7 @@
 		<table *ngIf="billers.length" class="table table-striped card2">
 			<thead>
 					<tr>
+						<th>Sl/No</th>
 						<th>Unique Id/Mob No</th>
 						<th>Bill Category</th>
 						<th>Bill Merchant</th>
@@ -18,12 +19,13 @@
 					</tr>
 			</thead>
 			<tbody>
-					<tr *ngFor = "let biller of billers">
+					<tr *ngFor = "let biller of billers; let i = index">
+						<td>{{i+1}}</td>
 						<td>{{biller.mobNo}}{{biller.premiumNo}}{{biller.electricbillNo}}</td>
 						<td>{{biller.vendor.category}}</td>
 						<td>{{biller.vendor.vcompName}}</td>
 						<td>
-						<a mat-raised-button color="primary" routerLink=""><mat-icon>edit</mat-icon></a>
+						<a mat-raised-button color="primary" routerLink="/banking/payments/manage_biller/{{biller.billerId}}"><mat-icon>edit</mat-icon></a>
 							
 						<button class="ml-1" mat-raised-button color="warn" (click)="removeBiller(biller.billerId)"><mat-icon>delete</mat-icon></button>
 
