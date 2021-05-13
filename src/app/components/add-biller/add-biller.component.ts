@@ -1,8 +1,11 @@
+
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BillerService} from '../../services/biller.service';
 import Swal from 'sweetalert2';
 import {Router,ActivatedRoute} from '@angular/router';
+import {AesUtil} from '../../utilities/securitymech';
+import {LoginService} from '../../services/login.service';
 
 @Component({
   selector: 'app-add-biller',
@@ -12,6 +15,7 @@ import {Router,ActivatedRoute} from '@angular/router';
 export class AddBillerComponent implements OnInit {
 
   firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
 
   cat=['Mobile_Recharge','Insurance','Electric_Bill'];
 
@@ -24,19 +28,33 @@ export class AddBillerComponent implements OnInit {
     transPwd:""
   };
 
+  vendorDetail={
+  vcompName:""
+  };
+
+  message=""
+
   toggle=false;
 
-  constructor(private _formBuilder: FormBuilder, private billerService:BillerService, private router:Router) { }
+  isEditable=true;
+
+  aesUtil=new AesUtil();
+
+  constructor(private _formBuilder: FormBuilder, private billerService:BillerService, private router:Router, private loginService:LoginService) { }
 
   ngOnInit(): void {
   	this.vendorList=[];
   	this.firstFormGroup = this._formBuilder.group({
   	  selectedCat:['',Validators.required],
-      premiumNo: ['',Validators.required],
-      mobNo: ['',[Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
-      electricbillNo:['',Validators.required],
-      vendorId:['',Validators.required]
+      premiumNo: [''],
+      mobNo: ['',[Validators.minLength(10),Validators.maxLength(10)]],
+      electricbillNo:[''],
+      vendorId:['']
  
+    });
+
+    this.secondFormGroup = this._formBuilder.group({
+      transPwd: ['', Validators.required]
     });
 
   }
@@ -52,45 +70,65 @@ export class AddBillerComponent implements OnInit {
   	}, error=> console.log(error));
   }
 
-  onSubmit(){
+  firstFormData(stepper){
   if(this.firstFormGroup.value.mobNo.length || this.firstFormGroup.value.premiumNo.length || this.firstFormGroup.value.electricbillNo.length){
-  	this.biller.mobNo=this.firstFormGroup.value.mobNo;
-  	this.biller.premiumNo=this.firstFormGroup.value.premiumNo;
-  	this.biller.electricbillNo=this.firstFormGroup.value.electricbillNo;
+    this.biller.mobNo=this.firstFormGroup.value.mobNo;
+    this.biller.premiumNo=this.firstFormGroup.value.premiumNo;
+    this.biller.electricbillNo=this.firstFormGroup.value.electricbillNo;
+    this.billerService.getVendorDetails(this.firstFormGroup.value.vendorId).subscribe(data=>{
+      this.vendorDetail=data;
+    },error=> console.log(error));
 
-    Swal.fire({
-    title: "Authentication!",
-    text: "Enter Your High Security Password:",
-    input: 'password',
-    showCancelButton: true        
-    }).then((result) => {
-        if (result.value) {
-            this.biller.transPwd=result.value.trim();
-            this.billerService.addBiller(this.biller,this.firstFormGroup.value.vendorId).subscribe(data=>{
-            if(data !== "Invalid Password!"){
-              Swal.fire(
-                        'Status!',
-                        'Biller Added Successfully!',
-                        'success'
-                      )
-            } else {
-              Swal.fire(
-              'Status!',
-              data,
-              'warning'
+    var div =  document.querySelector('#initial_head');
+    var div2= document.querySelector('.poscent');
+    if(div!=null && div2!=null){
+
+      div.classList.remove('checkheader');
+      div2.classList.remove('poscent');
+
+    }
+    stepper.next();
+    
+    
+    }
+  }
+
+  secondFormData(stepper){
+    this.biller.transPwd=this.secondFormGroup.value.transPwd.trim();
+
+    this.loginService.generateKey().subscribe(data=>{
+      var iv=data['iv'];
+      var k=data['key'];
+      var ciphertext = this.aesUtil.encrypt(iv,k,this.biller.transPwd.trim());
+      this.biller.transPwd=ciphertext;
+
+
+      this.billerService.addBiller(this.biller,this.firstFormGroup.value.vendorId).subscribe(data=>{
+            this.message=data;
+            if(data==="Invalid Password!"){
+            this
+            Swal.fire(
+            "",
+            data,
+            'warning'
             )
+            } else {
+              stepper.next();
             }
-            this.ngOnInit();
-            },error => console.log(error));
-            
-        }
-    });
+            },error =>this.message=error,() => {
+            this.isEditable=false;
+            });
+      
+      
+      },
+      error =>{ console.log(error) });
 
-
-
-  	
   }
-  
+
+  cancelTransaction(){
+  location.reload();
   }
+
+
 
 }

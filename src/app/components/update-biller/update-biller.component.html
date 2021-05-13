@@ -1,34 +1,90 @@
 <div class="container mt-2">
-	<h2 class="card-header text-center heading-page card3">Update Biller</h2>
-<br/>
+  <h2 class="card-header text-center heading-page card3">Register Biller</h2>
+<mat-horizontal-stepper linear #stepper style="margin-top: -15px">
+  <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
+    <div class="text-center">
+      <form [formGroup]="firstFormGroup">
+      	<ng-template matStepLabel><div id="initial_head" class="checkheader"><span class="poscent">Fill out Biller details</span></div></ng-template>
+			<div class="card2 text-center">
+				<h2 class="text-center card3 card-header">Fill the Details</h2>
+          		<div *ngIf="vendorList.length">
+	    		  		<span><b>Current Provider : </b>{{this.biller.vendor.vcompName}}</span>
+          			<br/>
+          			<mat-form-field>
+	             		<mat-label>Change Merchant/Company</mat-label>
+	    		  		<mat-select formControlName="vendorId" [(value)]="selected">
+	        				<mat-option  *ngFor = "let vendor of vendorList" value={{vendor.vendorId}} >{{vendor.vcompName}}</mat-option>
+	    		  		</mat-select>	
+          			</mat-form-field><br/>
+          			<div>
+	          			<mat-form-field *ngIf="biller.vendor.category=='Mobile_Recharge'">
+				          	<mat-label>Mobile No</mat-label>
+				            <input matInput formControlName="mobNo" placeholder="" pattern="^[0-9]{10}$">
+				        </mat-form-field>
 
-<form (ngSubmit)="onSubmit()">
-	<div class="card2 text-center">
-				<h2 class="text-center card3 card-header">Edit the Details</h2>
-				<mat-form-field *ngIf="biller.vendor.category==='Mobile_Recharge'" class="full-width">
-					<mat-label color="red">
-						Mob No
-					</mat-label>
-					<input style="color: black" type="text" matInput required [(ngModel)]="biller.mobNo" name="mobNo">
-				</mat-form-field>
-				<mat-form-field *ngIf="biller.vendor.category==='Insurance'" class="full-width">
-					<mat-label color="red">
-						Premium No
-					</mat-label>
-					<input style="color: black" type="text" matInput required [(ngModel)]="biller.premiumNo" name="premiumNo">
-				</mat-form-field>
-				<mat-form-field *ngIf="biller.vendor.category==='Electric_Bill'" class="full-width">
-					<mat-label color="red">
-						Electric Bill No
-					</mat-label>
-					<input style="color: black" type="text" matInput required [(ngModel)]="biller.electricbillNo" name="electricbillNo">
-				</mat-form-field>
+				        <mat-form-field *ngIf="biller.vendor.category=='Insurance'">
+				          	<mat-label>Premium No</mat-label>
+				            <input matInput formControlName="premiumNo" placeholder="" >
+				        </mat-form-field>
 
-				<div class="container text-center">
-					<button type="submit" mat-raised-button color="primary">Update</button>
-				</div>
-	</div>
-</form>
+				        <mat-form-field *ngIf="biller.vendor.category=='Electric_Bill'">
+				          	<mat-label>Electric Bill No</mat-label>
+				            <input matInput formControlName="electricbillNo" placeholder="" >
+				        </mat-form-field>
+				        <div class="text-center">
+				        	<button  mat-raised-button color="primary" (click)="firstFormData(stepper)">Proceed</button>
+				    	</div>
+			    	</div>
+          		</div>
+			</div>
+		</form>
+
+    </div>
+  </mat-step>
+
+
+ <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
+    <div class="text-center mb-5">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Biller Summary & Authentication</ng-template>
+
+      
+            <div style="margin-bottom: 1%" class="card2 text-center">
+                <h2 class="card-header text-center card3">Biller Details</h2>
+                <div style="text-align: left;margin-left: 2%">
+                  <p><b>Category : </b><span style="font-weight: light;">{{this.biller.vendor.category}}</span></p>
+                  <p><b>Merchant : </b><span style="font-weight: light;">{{this.biller.vendor.vcompName}}</span></p>
+                  <p *ngIf="biller.mobNo.length"><b>Mob No : </b><span style="font-weight: light;"> {{this.biller.mobNo}}</span></p>
+                  <p *ngIf="biller.premiumNo.length"><b>Premium No : </b><span style="font-weight: light;">{{this.biller.premiumNo}}</span></p>  
+                  <p *ngIf="biller.electricbillNo.length"><b>Electric Bill No : </b><span style="font-weight: light;">{{this.biller.electricbillNo}}</span></p>  
+                </div>
+        	</div>
+        
+      
+      <mat-form-field>
+        <mat-label>Enter your High Security Password</mat-label>
+        <input type="Password" matInput formControlName="transPwd" placeholder="" required>
+      </mat-form-field>
+
+      <div>
+        <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+        <button class="ml-2" mat-raised-button color="accent" (click)="secondFormData(stepper)">Confirm & Proceed</button>
+        <button class="ml-2" mat-raised-button color="warn" (click)="cancelTransaction()">Cancel</button>
+      </div>
+    
+    </form>
+  </div>
+  </mat-step>
+
+
+  <mat-step>
+    <ng-template matStepLabel>Operation Status</ng-template>
+    <div class="text-center card2">
+      <mat-spinner *ngIf="!message.length" style="margin-left: 42%"></mat-spinner><br/>
+      <h2>{{message}}</h2>
+      <button *ngIf="message == 'Invalid Password!' " class="ml-2" mat-raised-button color="accent" (click)="cancelTransaction()">Try Again</button>
+      <button class="ml-2" mat-raised-button color="primary"><a style="color: white;text-decoration: none" routerLink="/banking/payments/manage_biller">View Biller</a></button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
 </div>
-
-

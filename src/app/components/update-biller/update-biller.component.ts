@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import {BillerService} from '../../services/biller.service';
 import Swal from 'sweetalert2';
+import {AesUtil} from '../../utilities/securitymech';
+import {LoginService} from '../../services/login.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-update-biller',
@@ -10,73 +13,133 @@ import Swal from 'sweetalert2';
 })
 export class UpdateBillerComponent implements OnInit {
 
-	biller={
-	vendor:{
-	category:""
-	}
-	};
+	firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
 
-	passcode={
-	transPwd:""
-	}
+  vendorList=[];
 
-  constructor(private route:ActivatedRoute, private billerService:BillerService,private router:Router) { }
+  biller={
+  premiumNo:"",
+  mobNo:"",
+  electricbillNo:"",
+  vendor:{
+  vendorId:"",
+  category:"",
+  vcompName:""
+  }
+
+  };
+
+  passcode={
+  transPwd:""
+  }
+
+  message=""
+
+  selected;
+
+  isEditable=true;
+
+  aesUtil=new AesUtil();
+
+
+  constructor(private _formBuilder: FormBuilder, private billerService:BillerService, private router:Router, private loginService:LoginService,private route:ActivatedRoute) { }
 
   ngOnInit(): void {
-  	this.getBiller(this.route.snapshot.params.id);
+    this.vendorList=[];
+    this.getBillerDetail(this.route.snapshot.params.id);
+    
   }
 
-  getBiller(id){
-  	this.billerService.getBillerDetails(id).subscribe(data=>{
-  		this.biller=data;
-  		//console.log(this.biller);
-  	},error => console.log(error));
-  }
+  getBillerDetail(id){
+  this.billerService.getBillerDetails(id).subscribe(data=>{
+  this.biller=data;
+  this.callVendors(data.vendor.category);
+  },error=>console.log(error),()=>{
 
-  onSubmit(){
-  
-
-  Swal.fire({
-    title: "Authentication!",
-    text: "Enter Your High Security Password:",
-    input: 'password',
-    showCancelButton: true        
-    }).then((result) => {
-        if (result.value) {
-            this.passcode.transPwd=result.value.trim();
-            this.billerService.authenticateBiller(this.passcode).subscribe(data=>{
-            if(data === "Invalid Password!"){
-	            Swal.fire(
-	              'Status!',
-	              data,
-	              'warning'
-	            )
-              
-            } else if(data==='valid'){
-
-	            this.billerService.updateBiller(this.biller).subscribe(data=>{
-			  	Swal.fire(
-	                        'Status!',
-	                        'Biller Updated Successfully!',
-	                        'success'
-	                      )
-	            this.router.navigate(["/banking/payments/manage_biller"]);
-			  }, error=> console.log(error));
-            }
-            this.ngOnInit();
-            },error => console.log(error));
-            
-        }
+  this.firstFormGroup = this._formBuilder.group({
+      premiumNo: [this.biller.premiumNo],
+      mobNo: [this.biller.mobNo,[Validators.minLength(10),Validators.maxLength(10)]],
+      electricbillNo:[this.biller.electricbillNo],
+      vendorId:[this.biller.vendor.vendorId,Validators.required]
+ 
     });
 
+    this.secondFormGroup = this._formBuilder.group({
+      transPwd: ['', Validators.required]
+    });
+  });
+  }
+
+  callVendors(categ){
+    this.billerService.getVendorsByCategory(categ).subscribe(data=>{
+    this.vendorList=data;
+    }, error=> console.log(error));
+  }
+
+  firstFormData(stepper){
+  if((this.firstFormGroup.value.mobNo.length || this.firstFormGroup.value.premiumNo.length || this.firstFormGroup.value.electricbillNo.length)){
+    this.billerService.getVendorDetails(this.firstFormGroup.value.vendorId).subscribe(data=>{
+      this.biller.vendor=data;
+      this.biller.mobNo=this.firstFormGroup.value.mobNo;
+      this.biller.premiumNo=this.firstFormGroup.value.premiumNo;
+      this.biller.electricbillNo=this.firstFormGroup.value.electricbillNo;
+      stepper.next();
+    },error=>console.log(error),()=>{
+    //console.log(this.biller);
+
+    });
+    
+    var div =  document.querySelector('#initial_head');
+    var div2= document.querySelector('.poscent');
+    if(div!=null && div2!=null){
+
+      div.classList.remove('checkheader');
+      div2.classList.remove('poscent');
+
+    }
 
 
 
+    }
+  
+    
+    
+  }
 
-  /*this.billerService.updateBiller(this.biller).subscribe(data=>{
-  	alert(data);
-  }, error=> console.log(error));*/
+  secondFormData(stepper){
+    this.passcode.transPwd=this.secondFormGroup.value.transPwd.trim();
 
+    this.loginService.generateKey().subscribe(data=>{
+      var iv=data['iv'];
+      var k=data['key'];
+      var ciphertext = this.aesUtil.encrypt(iv,k,this.passcode.transPwd.trim());
+      this.passcode.transPwd=ciphertext;
+
+      this.billerService.authenticateBiller(this.passcode).subscribe((data)=>{
+      if(data==="Invalid Password!"){
+            this
+            Swal.fire(
+            "",
+            data,
+            'warning'
+            )
+            } else if(data==="valid"){
+              this.billerService.updateBiller(this.biller).subscribe(data=>{
+                this.message=data;
+                this.isEditable=false;
+                stepper.next();
+              },error=>console.log(error));
+
+            }
+      },error=>console.log(error));
+
+    },error=>console.log(error));
+
+  }
+
+  cancelTransaction(){
+  location.reload();
   }
 
 }

@@ -1,4 +1,5 @@
 
+
 .card3{
 	box-shadow: 0px 0px 5px #888888;
 }
@@ -12,11 +13,25 @@
 	width: 500px;
 	text-align: center;
 	border:1px solid #c8cacc;
-	margin-left: 30%;
+	margin-left: 25%;
 	padding: 1rem;
 	border-radius: 0.25rem;
 	margin-top: 5px;
 	box-shadow: 0px 0px 10px #888888;
 	margin-bottom: 5%;
 	background-color: white;
+}
+
+.checkheader{
+	width: 200px;
+	height: 80px;
+	background-color: rgba(0,0,0,0.04);
+}
+
+.poscent {
+  position: absolute;
+  top: 36%;
+  left: 25%;
+  /*opacity: 1!important;
+  z-index: 11;*/
 }
