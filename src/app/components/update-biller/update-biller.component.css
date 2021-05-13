@@ -20,3 +20,17 @@
 	margin-bottom: 5%;
 	background-color: white;
 }
+
+.checkheader{
+	width: 200px;
+	height: 80px;
+	background-color: rgba(0,0,0,0.04);
+}
+
+.poscent {
+  position: absolute;
+  top: 36%;
+  left: 25%;
+  /*opacity: 1!important;
+  z-index: 11;*/
+}
