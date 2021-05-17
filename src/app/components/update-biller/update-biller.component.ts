@@ -138,8 +138,11 @@ export class UpdateBillerComponent implements OnInit {
 
   }
 
-  cancelTransaction(){
-  location.reload();
+  cancelTransaction(stepper){
+  
+  stepper.reset();
+  this.ngOnInit();
+  //location.reload();
   }
 
 }

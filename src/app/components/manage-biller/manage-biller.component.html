@@ -12,6 +12,7 @@
 					<tr>
 						<th>Sl/No</th>
 						<th>Unique Id/Mob No</th>
+						<th>Customer Id</th>
 						<th>Bill Category</th>
 						<th>Bill Merchant</th>
 						<th>Actions</th>
@@ -22,6 +23,7 @@
 					<tr *ngFor = "let biller of billers; let i = index">
 						<td>{{i+1}}</td>
 						<td>{{biller.mobNo}}{{biller.premiumNo}}{{biller.electricbillNo}}</td>
+						<td>100253{{i}}</td>
 						<td>{{biller.vendor.category}}</td>
 						<td>{{biller.vendor.vcompName}}</td>
 						<td>
