@@ -22,20 +22,36 @@
 				          	<mat-label>Mobile No</mat-label>
 				            <input matInput formControlName="mobNo" placeholder="" pattern="^[0-9]{10}$">
 				        </mat-form-field>
+                <div *ngIf="firstFormGroupControl.mobNo.invalid && (firstFormGroupControl.mobNo.dirty || firstFormGroupControl.mobNo.touched)" class="alert alert-danger err-toast mb-1">
+                  <div *ngIf="firstFormGroupControl.mobNo.errors.minlength || firstFormGroupControl.mobNo.errors.maxlength">
+                    <small>Mob No must be of 10 digit.</small>
+                  </div>
+                </div>
 
 				        <mat-form-field *ngIf="biller.vendor.category=='Insurance'">
 				          	<mat-label>Policy No</mat-label>
 				            <input matInput formControlName="premiumNo" placeholder="" >
 				        </mat-form-field>
+                <div *ngIf="firstFormGroupControl.premiumNo.invalid && (firstFormGroupControl.premiumNo.dirty || firstFormGroupControl.premiumNo.touched)" class="alert alert-danger err-toast mb-1">
+                    <small>Only numbers allowed.</small>
+                </div>
+
                 <div *ngIf="biller.vendor.category=='Electric_Bill'">
   				        <mat-form-field>
   				          	<mat-label>Meter No</mat-label>
   				            <input matInput formControlName="electricbillNo" placeholder="" >
-  				        </mat-form-field><br/>
+  				        </mat-form-field>
+                  <div *ngIf="firstFormGroupControl.electricbillNo.invalid && (firstFormGroupControl.electricbillNo.dirty || firstFormGroupControl.electricbillNo.touched)" class="alert alert-danger err-toast mb-1">
+                    <small>Only alphanumerics allowed.</small>
+                  </div>
+                  <br/>
                   <mat-form-field>
                       <mat-label>Customer Id</mat-label>
                       <input matInput formControlName="customerId" placeholder="" >
                   </mat-form-field>
+                  <div *ngIf="firstFormGroupControl.customerId.invalid && (firstFormGroupControl.customerId.dirty || firstFormGroupControl.customerId.touched)" class="alert alert-danger err-toast mb-1">
+                    <small>Only alphanumerics allowed.</small>
+                  </div>
                 </div>
 				        <div class="text-center">
 				        	<button  mat-raised-button color="primary" (click)="firstFormData(stepper)">Proceed</button>

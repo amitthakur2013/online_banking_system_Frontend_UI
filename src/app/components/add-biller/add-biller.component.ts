@@ -66,14 +66,18 @@ export class AddBillerComponent implements OnInit {
   }
 
   callVendors(){
+
   	this.billerService.getVendorsByCategory(this.firstFormGroup.value.selectedCat).subscribe(data=>{
   	this.vendorList=data;
-    this.firstFormGroup.value.vendorId="";
-    this.firstFormGroup.value.mobNo="";
-    this.firstFormGroup.value.electricbillNo="";
-    this.firstFormGroup.value.premiumNo="";
-    this.firstFormGroup.value.customerId="";
-
+    
+    this.firstFormGroup.patchValue({
+    vendorId:"",
+    mobNo:"",
+    electricbillNo:"",
+    premiumNo:"",
+    customerId:""
+    });
+    
     this.biller={
     mobNo:"",
     premiumNo:"",
