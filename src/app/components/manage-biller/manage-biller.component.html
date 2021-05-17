@@ -1,4 +1,4 @@
-<div class="container text-center mt-2 mb-5">
+<div class="container text-center mt-2">
 	<h2 style="background-color: #87a7ff;color:white" class="card-header card2">Your Billers</h2>
 	<a routerLink="/banking/payments/manage_biller/add" class="btn btn-md btn-info mb-2"> Register Biller </a>
 	<div *ngIf="!billers.length" style="margin-left: 45%">
@@ -7,7 +7,7 @@
 
 	<div  class="row text-center mt-1">
 		
-		<table *ngIf="billers.length" class="table table-striped card2">
+		<table *ngIf="billers.length" class="table table-striped card2 mb-5">
 			<thead>
 					<tr>
 						<th>Sl/No</th>

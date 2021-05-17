@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import * as CryptoJS from 'crypto-js';  
 import {AesUtil} from '../../utilities/securitymech';
 import {LoginService} from '../../services/login.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-beneficiary',
@@ -69,8 +70,9 @@ export class AddBeneficiaryComponent implements OnInit {
 
   }
 
-  secondFormData(){
-
+  secondFormData(stepper){
+    if(!this.secondFormGroup.value.transPwd.length)
+      return;
     this.loginService.generateKey().subscribe(data=>{
       var iv=data['iv'];
       var k=data['key'];
@@ -79,11 +81,25 @@ export class AddBeneficiaryComponent implements OnInit {
 
       this.accountService.addBeneficiary(this.fullData).subscribe(data =>{
         this.message=data;
+        if(data==="Invalid Password!"){
+            this
+            Swal.fire(
+            "",
+            data,
+            'warning'
+            )
+            } else if(data==="Beneficiary added Successfully!")
+            {
+              
+                this.isEditable=false;
+                stepper.next();
+              }
+
       }, error => {
         this.message=error;
         console.log(error);
       },() => {
-        this.isEditable=false;
+        //this.isEditable=false;
       });
       
     },

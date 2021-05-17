@@ -9,32 +9,32 @@
         <h2 class="text-center card-header card3">Fill the Details</h2>
         <mat-form-field>
           <mat-label>Name</mat-label>
-          <input matInput formControlName="name" placeholder="Enter name" required>
+          <input matInput formControlName="name" placeholder="Enter name" required pattern="^[a-zA-Z]+$">
         </mat-form-field><br/>
 
         <mat-form-field>
           <mat-label>Account No</mat-label>
-          <input matInput formControlName="accountNo" placeholder="Enter ac no" required>
+          <input matInput formControlName="accountNo" placeholder="Enter ac no" required pattern="^[0-9]+$">
         </mat-form-field><br/>
 
         <mat-form-field>
           <mat-label>Bank Name</mat-label>
-          <input matInput formControlName="bankName" placeholder="Enter bank name" required>
+          <input matInput formControlName="bankName" placeholder="Enter bank name" required pattern="^[a-zA-Z]+$">
         </mat-form-field><br/>
 
         <mat-form-field>
           <mat-label>Branch Name</mat-label>
-          <input matInput formControlName="branchName" placeholder="Enter branch name" required>
+          <input matInput formControlName="branchName" placeholder="Enter branch name" required pattern="^[a-zA-Z]+$">
         </mat-form-field><br/>
 
         <mat-form-field>
           <mat-label>Ifsc Code</mat-label>
-          <input matInput formControlName="ifscCode" placeholder="Enter code" required>
+          <input matInput formControlName="ifscCode" placeholder="Enter code" required pattern="^[a-zA-Z0-9]+$">
         </mat-form-field><br/>
 
         <mat-form-field>
           <mat-label>Nickname</mat-label>
-          <input matInput formControlName="nickname" placeholder="Enter nickname">
+          <input matInput formControlName="nickname" placeholder="Enter nickname" pattern="^[a-zA-Z]+$">
         </mat-form-field><br/>
         
         <div>
@@ -72,7 +72,7 @@
 
       <div>
         <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-        <button class="ml-2" mat-raised-button color="accent" matStepperNext (click)="secondFormData()">Confirm & Proceed</button>
+        <button class="ml-2" mat-raised-button color="accent" (click)="secondFormData(stepper)">Confirm & Proceed</button>
         <button class="ml-2" mat-raised-button color="warn" (click)="cancelTransaction()">Cancel</button>
       </div>
     
