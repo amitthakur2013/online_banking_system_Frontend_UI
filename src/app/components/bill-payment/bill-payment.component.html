@@ -31,7 +31,7 @@
       		     <mat-option *ngFor = "let biller of billerList" value="{{biller.vendor.vcompName.toString()+'-'+biller.mobNo+biller.premiumNo+biller.electricbillNo+'-'+biller.customerId}}" >{{biller.premiumNo}}{{biller.mobNo}}<span *ngIf="selectedCat==='Electric_Bill'">{{biller.customerId}} - </span>{{biller.electricbillNo}}</mat-option>
       		  </mat-select>	
             
-          </mat-form-field><br/>
+          </mat-form-field>
           <div *ngIf="!vendorList.length">
             <small style="color: red">No Biller exists, Go & add</small><br/>
             <a mat-raised-button color="primary" routerLink="/banking/payments/manage_biller/add">Add Biller</a>
@@ -42,8 +42,7 @@
           </mat-form-field>
           <div *ngIf="firstFormGroupControl.amount.invalid && (firstFormGroupControl.amount.dirty || firstFormGroupControl.amount.touched)" class="alert alert-danger err-toast mb-1">
             <small>Enter valid amount.</small>
-          </div>
-          <br/>
+          </div><br/>
           <mat-form-field>
           <mat-label>Remark(optional)</mat-label>
             <input matInput formControlName="remark" placeholder="" >
