@@ -28,6 +28,7 @@ export class BillPaymentComponent implements OnInit {
 
   accntList=[]
   billerList=[]
+  vendorList=[]
 
   message={
   category:"",
@@ -42,19 +43,24 @@ export class BillPaymentComponent implements OnInit {
 
   isEditable=true;
 
+  selectedCat="";
+
+  v_name="";
+
   aesUtil=new AesUtil();
 
   constructor(private _formBuilder: FormBuilder, private accountService:AccountService,private loginService:LoginService,private billerService:BillerService, private router:Router) { }
 
   ngOnInit(): void {
   	this.getAccountsList();
-  	this.getBillerList();
+    this.getVendorList();
 
   	this.firstFormGroup = this._formBuilder.group({
       fromAccountNo: ['', Validators.required],
       biller: ['',Validators.required],
       amount:['',[Validators.min(1),Validators.required]],
-      remark:['']
+      remark:[''],
+      vendor:[[],Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
       transPwd: ['', Validators.required]
@@ -72,9 +78,19 @@ export class BillPaymentComponent implements OnInit {
   }
 
   getBillerList(){
+    this.v_name=this.firstFormGroup.value.vendor.split(",")[0];
+    this.selectedCat=this.firstFormGroup.value.vendor.split(",")[1];
   	this.billerService.getAllBillers().subscribe(data=>{
-  		this.billerList=data;
+      //console.log(data);
+  		this.billerList=data.filter(d => d.vendor.vcompName === this.v_name);
   	},error => console.log(error));
+  }
+
+  getVendorList(){
+    this.billerService.getVendorsofUser().subscribe(data =>{
+      this.vendorList=data;
+      //console.log(this.vendorList);
+    },error => console.log(error));
   }
 
   firstFormData(){
@@ -87,12 +103,16 @@ export class BillPaymentComponent implements OnInit {
 
   var div =  document.querySelector('#initial_head');
   var div2= document.querySelector('.poscent');
-  div.classList.remove('checkheader');
-  div2.classList.remove('poscent');
+    if(div !=null && div2!=null){
+    div.classList.remove('checkheader');
+    div2.classList.remove('poscent');
+    }
   }
 
   secondFormData(stepper){
-
+    if(this.secondFormGroup.value.transPwd === '' || this.secondFormGroup.value.transPwd==null){
+    return;
+    }
     this.loginService.generateKey().subscribe(data=>{
       var iv=data['iv'];
       var k=data['key'];
