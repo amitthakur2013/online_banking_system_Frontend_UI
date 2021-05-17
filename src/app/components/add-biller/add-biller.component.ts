@@ -61,6 +61,10 @@ export class AddBillerComponent implements OnInit {
 
   }
 
+  get firstFormGroupControl() {
+    return this.firstFormGroup.controls;
+  }
+
   callVendors(){
   	this.billerService.getVendorsByCategory(this.firstFormGroup.value.selectedCat).subscribe(data=>{
   	this.vendorList=data;
@@ -138,7 +142,7 @@ export class AddBillerComponent implements OnInit {
   }
 
   backForm(){
-  this.ngOnInit();
+  //this.ngOnInit();
   }
 
 

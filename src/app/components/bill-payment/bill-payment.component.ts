@@ -70,6 +70,10 @@ export class BillPaymentComponent implements OnInit {
 
   }
 
+  get firstFormGroupControl() {
+    return this.firstFormGroup.controls;
+  }
+
   getAccountsList(){
   	this.accountService.getAllAccounts().subscribe(data => {
   		this.accntList=data.filter(account => account.acctType !== 'fixed deposit');

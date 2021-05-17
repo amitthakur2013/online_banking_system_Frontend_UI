@@ -6,7 +6,7 @@
       <form [formGroup]="firstFormGroup">
       	<ng-template matStepLabel><div id="initial_head" class="checkheader"><span class="poscent">Fill out Biller details</span></div></ng-template>
 			<div class="card2 text-center">
-				<h2 class="text-center card3 card-header">Fill the Details</h2>
+				<h2 class="text-center card3 card-header">Fill the Details</h2><br/>
 				<mat-form-field>
              		<mat-label>Select Category</mat-label>
     		  		<mat-select formControlName="selectedCat" (selectionChange)="callVendors()">
@@ -26,23 +26,38 @@
 				          	<mat-label>Mobile No</mat-label>
 				            <input matInput formControlName="mobNo" placeholder="" pattern="^[0-9]{10}$">
 				        </mat-form-field>
+                <div *ngIf="firstFormGroupControl.mobNo.invalid && (firstFormGroupControl.mobNo.dirty || firstFormGroupControl.mobNo.touched)" class="alert alert-danger err-toast mb-1">
+                  <div *ngIf="firstFormGroupControl.mobNo.errors.minlength || firstFormGroupControl.mobNo.errors.maxlength">
+                    <small>Mob No must be of 10 digit.</small>
+                  </div>
+                </div>
 
 				        <mat-form-field *ngIf="firstFormGroup.value.selectedCat=='Insurance'">
 				          	<mat-label>Policy No</mat-label>
 				            <input matInput formControlName="premiumNo" placeholder="" pattern="^[0-9]+$">
 				        </mat-form-field>
+                <div *ngIf="firstFormGroupControl.premiumNo.invalid && (firstFormGroupControl.premiumNo.dirty || firstFormGroupControl.premiumNo.touched)" class="alert alert-danger err-toast mb-1">
+                    <small>Only numbers allowed.</small>
+                </div>
+
                 <div *ngIf="firstFormGroup.value.selectedCat=='Electric_Bill'">
   				        <mat-form-field>
   				          	<mat-label>Customer Id</mat-label>
   				            <input matInput formControlName="customerId" placeholder="" pattern="^[0-9a-zA-Z]+$">
   				        </mat-form-field><br/>
+                  <div *ngIf="firstFormGroupControl.customerId.invalid && (firstFormGroupControl.customerId.dirty || firstFormGroupControl.customerId.touched)" class="alert alert-danger err-toast mb-1">
+                    <small>Only alphanumerics allowed.</small>
+                  </div>
 
                   <mat-form-field>
                       <mat-label>Meter No</mat-label>
                       <input matInput formControlName="electricbillNo" placeholder="" pattern="^[0-9a-zA-Z]+$">
                   </mat-form-field>
+                  <div *ngIf="firstFormGroupControl.electricbillNo.invalid && (firstFormGroupControl.electricbillNo.dirty || firstFormGroupControl.electricbillNo.touched)" class="alert alert-danger err-toast mb-1">
+                    <small>Only alphanumerics allowed.</small>
+                  </div>
               </div>
-				        <div class="text-center">
+				        <div class="text-center mt-5">
 				        	<button  mat-raised-button color="primary" (click)="firstFormData(stepper)">Proceed</button>
 				    	</div>
 			    	</div>

@@ -30,7 +30,11 @@
           <mat-form-field>
           <mat-label>Amount</mat-label>
             <input matInput formControlName="amount" placeholder="min amt 100" required pattern="^[0-9]+$">
-          </mat-form-field><br/>
+          </mat-form-field>
+          <div *ngIf="firstFormGroupControl.amount.invalid && (firstFormGroupControl.amount.dirty || firstFormGroupControl.amount.touched)" class="alert alert-danger err-toast mb-1">
+            <small>Enter valid amount.</small>
+          </div>
+          <br/>
           <mat-form-field>
           <mat-label>Remark(optional)</mat-label>
             <input matInput formControlName="remark" placeholder="" >
