@@ -52,6 +52,10 @@ export class UpdateBillerComponent implements OnInit {
     
   }
 
+  get firstFormGroupControl() {
+    return this.firstFormGroup.controls;
+  }
+
   getBillerDetail(id){
   this.billerService.getBillerDetails(id).subscribe(data=>{
   this.biller=data;
