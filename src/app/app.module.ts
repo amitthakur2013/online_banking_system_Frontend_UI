@@ -37,6 +37,7 @@ import { AddBillerComponent } from './components/add-biller/add-biller.component
 import { ManageBillerComponent } from './components/manage-biller/manage-biller.component';
 import { BillPaymentComponent } from './components/bill-payment/bill-payment.component';
 import { UpdateBillerComponent } from './components/update-biller/update-biller.component'; 
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { UpdateBillerComponent } from './components/update-biller/update-biller.
     MatSelectModule,
     MatDialogModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   providers: [[{provide: HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}],{provide: LocationStrategy, useClass: HashLocationStrategy},[Title],[LoaderService]],
   bootstrap: [AppComponent],

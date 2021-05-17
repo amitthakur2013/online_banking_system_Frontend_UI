@@ -4,6 +4,8 @@ import { AccountService } from '../../services/account.service';
 import * as CryptoJS from 'crypto-js';  
 import {AesUtil} from '../../utilities/securitymech';
 import {LoginService} from '../../services/login.service';
+import { ActivatedRoute,Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-fund-transfer',
@@ -42,7 +44,7 @@ export class FundTransferComponent implements OnInit {
 
   aesUtil=new AesUtil();
 
-  constructor(private _formBuilder: FormBuilder, private accountService:AccountService,private loginService:LoginService) { }
+  constructor(private _formBuilder: FormBuilder, private accountService:AccountService,private loginService:LoginService, private router:Router) { }
 
   ngOnInit(): void {
   	this.getAccountsList();
@@ -95,7 +97,7 @@ export class FundTransferComponent implements OnInit {
   div2.classList.remove('poscent');
   }
 
-  secondFormData(){
+  secondFormData(stepper){
 
     this.loginService.generateKey().subscribe(data=>{
       var iv=data['iv'];
@@ -106,6 +108,18 @@ export class FundTransferComponent implements OnInit {
       this.accountService.transferFund(this.fullData).subscribe(data =>{
     
       this.message=data;
+      if(data.category==="failure"){
+            this
+            Swal.fire(
+            "",
+            data.content,
+            'warning'
+            )
+      } else if(data.category==="success"){
+            stepper.next();
+            this.isEditable=false;
+        }
+
       }, error => this.message=error,() => {
       });
       
@@ -113,14 +127,18 @@ export class FundTransferComponent implements OnInit {
     error =>{ console.log(error) });
 
   	//this.fullData.transPwd=this.secondFormGroup.value.transPwd.trim();
-    
-    this.isEditable=false;
    
   
   }
 
   cancelTransaction(){
-  location.reload();
+  //location.reload();
+  this.router.navigate(['/banking/account/dashboard']);
+  }
+
+  resetForm(stepper){
+  stepper.reset();
+  this.ngOnInit();
   }
 
 }
