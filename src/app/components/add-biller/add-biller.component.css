@@ -36,3 +36,12 @@
   /*opacity: 1!important;
   z-index: 11;*/
 }
+
+.err-toast{
+opacity: .75;
+position: absolute;
+z-index: 999;
+left: 40%;
+
+
+}
