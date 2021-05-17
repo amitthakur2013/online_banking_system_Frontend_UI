@@ -19,7 +19,7 @@
           <mat-form-field *ngIf="billerList.length">
             <mat-label>Select Biller</mat-label>
       		  <mat-select formControlName="biller">
-      		     <mat-option *ngFor = "let biller of billerList" value="{{biller.vendor.category.toString() +' - '+ biller.vendor.vcompName.toString()}}" >{{biller.vendor.vcompName}} </mat-option>
+      		     <mat-option *ngFor = "let biller of billerList" value="{{biller.vendor.category.toString() +' - '+ biller.vendor.vcompName.toString()}}" >{{biller.vendor.vcompName}} - {{biller.premiumNo}}{{biller.mobNo}}{{biller.electricbillNo}}</mat-option>
       		  </mat-select>	
             
           </mat-form-field><br/>

@@ -28,14 +28,20 @@
 				        </mat-form-field>
 
 				        <mat-form-field *ngIf="firstFormGroup.value.selectedCat=='Insurance'">
-				          	<mat-label>Premium No</mat-label>
-				            <input matInput formControlName="premiumNo" placeholder="" >
+				          	<mat-label>Policy No</mat-label>
+				            <input matInput formControlName="premiumNo" placeholder="" pattern="^[0-9]+$">
 				        </mat-form-field>
+                <div *ngIf="firstFormGroup.value.selectedCat=='Electric_Bill'">
+  				        <mat-form-field>
+  				          	<mat-label>Customer Id</mat-label>
+  				            <input matInput formControlName="customerId" placeholder="" pattern="^[0-9a-zA-Z]+$">
+  				        </mat-form-field><br/>
 
-				        <mat-form-field *ngIf="firstFormGroup.value.selectedCat=='Electric_Bill'">
-				          	<mat-label>Electric Bill No</mat-label>
-				            <input matInput formControlName="electricbillNo" placeholder="" >
-				        </mat-form-field>
+                  <mat-form-field>
+                      <mat-label>Meter No</mat-label>
+                      <input matInput formControlName="electricbillNo" placeholder="" pattern="^[0-9a-zA-Z]+$">
+                  </mat-form-field>
+              </div>
 				        <div class="text-center">
 				        	<button  mat-raised-button color="primary" (click)="firstFormData(stepper)">Proceed</button>
 				    	</div>
@@ -60,8 +66,9 @@
                   <p><b>Category : </b><span style="font-weight: light;">{{firstFormGroup.value.selectedCat}}</span></p>
                   <p><b>Merchant : </b><span style="font-weight: light;">{{vendorDetail['vcompName']}}</span></p>
                   <p *ngIf="biller.mobNo.length"><b>Mob No : </b><span style="font-weight: light;"> {{biller.mobNo}}</span></p>
-                  <p *ngIf="biller.premiumNo.length"><b>Premium No : </b><span style="font-weight: light;">{{biller.premiumNo}}</span></p>  
-                  <p *ngIf="biller.electricbillNo.length"><b>Electric Bill No : </b><span style="font-weight: light;">{{biller.electricbillNo}}</span></p>  
+                  <p *ngIf="biller.premiumNo.length"><b>Policy No : </b><span style="font-weight: light;">{{biller.premiumNo}}</span></p>  
+                  <p *ngIf="biller.electricbillNo.length"><b>Meter No : </b><span style="font-weight: light;">{{biller.electricbillNo}}</span></p>  
+                  <p *ngIf="biller.customerId.length"><b>Customer Id : </b><span style="font-weight: light;">{{biller.customerId}}</span></p>  
                 </div>
         	</div>
         
@@ -72,7 +79,7 @@
       </mat-form-field>
 
       <div>
-        <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+        <button mat-raised-button color="primary" matStepperPrevious (click)="backForm()">Back</button>
         <button class="ml-2" mat-raised-button color="accent" (click)="secondFormData(stepper)">Confirm & Proceed</button>
         <button class="ml-2" mat-raised-button color="warn" (click)="cancelTransaction()">Cancel</button>
       </div>

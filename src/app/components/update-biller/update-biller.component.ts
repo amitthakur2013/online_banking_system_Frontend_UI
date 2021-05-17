@@ -22,6 +22,7 @@ export class UpdateBillerComponent implements OnInit {
   premiumNo:"",
   mobNo:"",
   electricbillNo:"",
+  customerId:"",
   vendor:{
   vendorId:"",
   category:"",
@@ -61,7 +62,8 @@ export class UpdateBillerComponent implements OnInit {
       premiumNo: [this.biller.premiumNo],
       mobNo: [this.biller.mobNo,[Validators.minLength(10),Validators.maxLength(10)]],
       electricbillNo:[this.biller.electricbillNo],
-      vendorId:[this.biller.vendor.vendorId,Validators.required]
+      vendorId:[this.biller.vendor.vendorId,Validators.required],
+      customerId:[this.biller.customerId]
  
     });
 
@@ -84,6 +86,7 @@ export class UpdateBillerComponent implements OnInit {
       this.biller.mobNo=this.firstFormGroup.value.mobNo;
       this.biller.premiumNo=this.firstFormGroup.value.premiumNo;
       this.biller.electricbillNo=this.firstFormGroup.value.electricbillNo;
+      this.biller.customerId=this.firstFormGroup.value.customerId;
       stepper.next();
     },error=>console.log(error),()=>{
     //console.log(this.biller);
@@ -138,10 +141,9 @@ export class UpdateBillerComponent implements OnInit {
 
   }
 
-  cancelTransaction(stepper){
   
-  stepper.reset();
-  this.ngOnInit();
+  cancelTransaction(){
+  this.router.navigate(['/banking/account/dashboard']);
   //location.reload();
   }
 

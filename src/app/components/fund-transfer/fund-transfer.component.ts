@@ -53,7 +53,7 @@ export class FundTransferComponent implements OnInit {
   	this.firstFormGroup = this._formBuilder.group({
       fromAccountNo: ['', Validators.required],
       toBenifId: ['',Validators.required],
-      amount:['',[Validators.min(100),Validators.required]],
+      amount:['',[Validators.min(1),Validators.required]],
       remark:['']
     });
     this.secondFormGroup = this._formBuilder.group({
