@@ -25,6 +25,7 @@ export class AddBillerComponent implements OnInit {
 	  mobNo:"",
 	  premiumNo:"",
 	  electricbillNo:"",
+    customerId:"",
     transPwd:""
   };
 
@@ -49,6 +50,7 @@ export class AddBillerComponent implements OnInit {
       premiumNo: [''],
       mobNo: ['',[Validators.minLength(10),Validators.maxLength(10)]],
       electricbillNo:[''],
+      customerId:[''],
       vendorId:['']
  
     });
@@ -60,21 +62,31 @@ export class AddBillerComponent implements OnInit {
   }
 
   callVendors(){
-  	this.firstFormGroup.value.vendorId="";
-  	this.firstFormGroup.value.mobNo="";
-  	this.firstFormGroup.value.electricbillNo="";
-  	this.firstFormGroup.value.premiumNo="";
-
   	this.billerService.getVendorsByCategory(this.firstFormGroup.value.selectedCat).subscribe(data=>{
   	this.vendorList=data;
+    this.firstFormGroup.value.vendorId="";
+    this.firstFormGroup.value.mobNo="";
+    this.firstFormGroup.value.electricbillNo="";
+    this.firstFormGroup.value.premiumNo="";
+    this.firstFormGroup.value.customerId="";
+
+    this.biller={
+    mobNo:"",
+    premiumNo:"",
+    electricbillNo:"",
+    customerId:"",
+    transPwd:""
+  };
   	}, error=> console.log(error));
   }
 
   firstFormData(stepper){
-  if(this.firstFormGroup.value.mobNo.length || this.firstFormGroup.value.premiumNo.length || this.firstFormGroup.value.electricbillNo.length){
+  if(this.firstFormGroup.value.mobNo.length || this.firstFormGroup.value.premiumNo.length || (this.firstFormGroup.value.electricbillNo.length && this.firstFormGroup.value.customerId.length)){
     this.biller.mobNo=this.firstFormGroup.value.mobNo;
     this.biller.premiumNo=this.firstFormGroup.value.premiumNo;
     this.biller.electricbillNo=this.firstFormGroup.value.electricbillNo;
+    this.biller.customerId=this.firstFormGroup.value.customerId;
+    //console.log(this.biller);
     this.billerService.getVendorDetails(this.firstFormGroup.value.vendorId).subscribe(data=>{
       this.vendorDetail=data;
     },error=> console.log(error));
@@ -125,8 +137,14 @@ export class AddBillerComponent implements OnInit {
 
   }
 
+  backForm(){
+  this.ngOnInit();
+  }
+
+
   cancelTransaction(){
-  location.reload();
+  this.router.navigate(['/banking/account/dashboard']);
+  //location.reload();
   }
 
 
