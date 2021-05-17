@@ -11,32 +11,32 @@
         <h2 class="text-center card-header card3">Fill the Details</h2>
         <mat-form-field>
           <mat-label>Name</mat-label>
-          <input matInput formControlName="name" placeholder="Enter name" required pattern="^[a-zA-Z]+$">
+          <input matInput formControlName="name" placeholder="Enter name" required pattern="^[a-zA-Z ]+$">
         </mat-form-field><br/>
 
         <mat-form-field>
           <mat-label>Account No</mat-label>
-          <input matInput formControlName="accountNo" placeholder="Enter ac no" required pattern="^[0-9]+$">
+          <input matInput formControlName="accountNo" placeholder="Enter ac no" required pattern="^[0-9 ]+$">
         </mat-form-field><br/>
 
         <mat-form-field>
           <mat-label>Bank Name</mat-label>
-          <input matInput formControlName="bankName" placeholder="Enter bank name" required pattern="^[a-zA-Z]+$">
+          <input matInput formControlName="bankName" placeholder="Enter bank name" required pattern="^[a-zA-Z ]+$">
         </mat-form-field><br/>
 
         <mat-form-field>
           <mat-label>Branch Name</mat-label>
-          <input matInput formControlName="branchName" placeholder="Enter branch name" required pattern="^[a-zA-Z]+$">
+          <input matInput formControlName="branchName" placeholder="Enter branch name" required pattern="^[a-zA-Z ]+$">
         </mat-form-field><br/>
 
         <mat-form-field>
           <mat-label>Ifsc Code</mat-label>
-          <input matInput formControlName="ifscCode" placeholder="Enter code" required pattern="^[a-zA-Z0-9]+$">
+          <input matInput formControlName="ifscCode" placeholder="Enter code" required pattern="^[a-zA-Z0-9 ]+$">
         </mat-form-field><br/>
 
         <mat-form-field>
           <mat-label>Nickname</mat-label>
-          <input matInput formControlName="nickname" placeholder="Enter nickname" pattern="^[a-zA-Z]+$">
+          <input matInput formControlName="nickname" placeholder="Enter nickname" pattern="^[a-zA-Z ]+$">
         </mat-form-field><br/>
         <div>
           <button mat-raised-button color="accent" matStepperNext (click)="firstFormData()">Proceed</button>
