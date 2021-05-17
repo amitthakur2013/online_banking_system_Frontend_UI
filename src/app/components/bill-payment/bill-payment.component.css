@@ -11,7 +11,8 @@
 	width: 550px;
 	text-align: center;
 	border:1px solid #c8cacc;
-	margin-left: 25%;
+	margin-right: auto;
+	margin-left: auto;
 	padding: 1rem;
 	border-radius: 0.25rem;
 	margin-top: 5px;
