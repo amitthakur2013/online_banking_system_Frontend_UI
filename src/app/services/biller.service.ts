@@ -44,4 +44,8 @@ export class BillerService {
   authenticateBiller(transPwd:Object):Observable<any>{
     return this.httpClient.post(`api/banking/payments/authenticate`,transPwd,{responseType: "text"});
   }
+
+  getVendorsofUser():Observable<any>{
+    return this.httpClient.get(`api/banking/payments/vendors/user`);
+  }
 } 

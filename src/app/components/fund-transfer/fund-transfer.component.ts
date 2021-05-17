@@ -98,7 +98,8 @@ export class FundTransferComponent implements OnInit {
   }
 
   secondFormData(stepper){
-
+    if(!this.secondFormGroup.value.transPwd.length)
+      return;
     this.loginService.generateKey().subscribe(data=>{
       var iv=data['iv'];
       var k=data['key'];

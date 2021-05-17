@@ -8,28 +8,37 @@
         <div class="card2 text-center">
           <h2 class="text-center card3 card-header">Fill the Details</h2>
           <mat-form-field>
-            <!--<mat-label>Name</mat-label>
-            <input matInput formControlName="name" placeholder="Last name, First name" required> -->
              <mat-label>Select an Account</mat-label>
              
     		  <mat-select formControlName="fromAccountNo">
             <mat-option  *ngFor = "let account of accntList" value={{account.id.acctNo.toString()}} >{{account.acctType}}</mat-option>
     		  </mat-select>	
           </mat-form-field><br/>
+
+          <mat-form-field *ngIf="vendorList.length">
+            <mat-label>Select Merchant</mat-label>
+            <mat-select formControlName="vendor" (selectionChange)="getBillerList()">
+               <mat-option *ngFor = "let vendor of vendorList" value="{{vendor}}" >{{vendor[0]}}</mat-option>
+            </mat-select> 
+            
+          </mat-form-field><br/>
+
           <mat-form-field *ngIf="billerList.length">
-            <mat-label>Select Biller</mat-label>
+            <mat-label *ngIf="selectedCat==='Insurance'">Select Policy</mat-label>
+            <mat-label *ngIf="selectedCat==='Mobile_Recharge'">Select Mob No</mat-label>
+            <mat-label *ngIf="selectedCat==='Electric_Bill'">Cust Id - Meter No</mat-label>
       		  <mat-select formControlName="biller">
-      		     <mat-option *ngFor = "let biller of billerList" value="{{biller.vendor.category.toString() +' - '+ biller.vendor.vcompName.toString()}}" >{{biller.vendor.vcompName}} - {{biller.premiumNo}}{{biller.mobNo}}{{biller.electricbillNo}}</mat-option>
+      		     <mat-option *ngFor = "let biller of billerList" value="{{biller.vendor.vcompName.toString()+'-'+biller.mobNo+biller.premiumNo+biller.electricbillNo+'-'+biller.customerId}}" >{{biller.premiumNo}}{{biller.mobNo}}<span *ngIf="selectedCat==='Electric_Bill'">{{biller.customerId}} - </span>{{biller.electricbillNo}}</mat-option>
       		  </mat-select>	
             
           </mat-form-field><br/>
-          <div *ngIf="!billerList.length">
+          <div *ngIf="!vendorList.length">
             <small style="color: red">No Biller exists, Go & add</small><br/>
             <a mat-raised-button color="primary" routerLink="/banking/payments/manage_biller/add">Add Biller</a>
           </div><br/>
           <mat-form-field>
           <mat-label>Amount</mat-label>
-            <input matInput formControlName="amount" placeholder="min amt 100" required>
+            <input matInput formControlName="amount" placeholder="min amt 1" pattern="^[0-9]+$" required>
           </mat-form-field><br/>
           <mat-form-field>
           <mat-label>Remark(optional)</mat-label>
@@ -53,9 +62,25 @@
         <div style="text-align: left;padding-left: 2%;">
           <h2 class="text-center card-header card3">Payment Details</h2>
           <p><strong>From Account No : </strong> {{this.fullData.fromAccountNo}}</p>
-          <p><strong>To Biller : </strong>{{this.fullData.biller}}</p>
+          
+          <div *ngIf="selectedCat === 'Insurance'">
+            <p><strong>To Merchant: </strong>{{v_name}}</p>
+            <p><strong>Policy No: </strong>{{this.fullData.biller.split("-")[1]}}</p>
+          </div>
+          <div *ngIf="selectedCat === 'Mobile_Recharge'">
+            <p><strong>To Provider: </strong>{{v_name}}</p>
+            <p><strong>Mob No: </strong>{{this.fullData.biller.split("-")[1]}}</p>
+          </div>
+          <div *ngIf="selectedCat === 'Electric_Bill'">
+            <p><strong>To Merchant: </strong>{{v_name}}</p>
+            <p><strong>Customer Id: </strong>{{this.fullData.biller.split("-")[2]}}</p>
+            <p><strong>Meter No: </strong>{{this.fullData.biller.split("-")[1]}}</p>
+          </div>
+          <p><strong>Category: </strong>{{selectedCat}}</p>
+          
           <p><strong>Amount : </strong> {{this.fullData.amount | currency:'INR'}}</p><br/>
         </div>
+
       </div>
       <mat-form-field>
         <mat-label>Enter your High Security Password</mat-label>
