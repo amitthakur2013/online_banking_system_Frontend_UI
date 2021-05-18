@@ -39,7 +39,7 @@
                 <div *ngIf="biller.vendor.category=='Electric_Bill'">
   				        <mat-form-field>
   				          	<mat-label>Meter No</mat-label>
-  				            <input matInput formControlName="electricbillNo" placeholder="" >
+  				            <input matInput formControlName="electricbillNo" placeholder="" pattern="^[0-9a-zA-Z ]+$">
   				        </mat-form-field>
                   <div *ngIf="firstFormGroupControl.electricbillNo.invalid && (firstFormGroupControl.electricbillNo.dirty || firstFormGroupControl.electricbillNo.touched)" class="alert alert-danger err-toast mb-1">
                     <small>Only alphanumerics allowed.</small>
@@ -47,7 +47,7 @@
                   <br/>
                   <mat-form-field>
                       <mat-label>Customer Id</mat-label>
-                      <input matInput formControlName="customerId" placeholder="" >
+                      <input matInput formControlName="customerId" placeholder="" pattern="^[0-9a-zA-Z ]+$">
                   </mat-form-field>
                   <div *ngIf="firstFormGroupControl.customerId.invalid && (firstFormGroupControl.customerId.dirty || firstFormGroupControl.customerId.touched)" class="alert alert-danger err-toast mb-1">
                     <small>Only alphanumerics allowed.</small>
