@@ -1,7 +1,7 @@
 <div class="container">
 	<h2 style="background-color: #87a7ff" class="text-center mt-2 card-header card2">Welcome, {{userdata['firstName']}}! <i class="far fa-smile-beam"></i></h2><br/>
-	<div class="row mb-2">
-		<div class="col-md-6">
+	<div style="padding: 0" class="row mb-2">
+		<div style="padding: 0" class="col-md-4 col-12 col-sm-12">
 			<div style="color:black" class="container">
 			<h2 class="card card2 card-header"><i class="far fa-address-card"></i><span class="icon-text-pos">Profile Details</span></h2><br/>
 			<ul *ngIf="userdata" style="padding: 20px;list-style-type: none;" class="card card2">
@@ -13,23 +13,8 @@
 			</ul>
 			</div>
 		</div>
-		<div class="col-md-6">
-			<!--<small>select your account for details</small>
-			<div class="row">
-				<div class="col-md-8 col-12">
-					<select [(ngModel)]="selectedLevel" (change)="selected()" class="form-control">
-						<option disabled>
-							please select account
-						</option>
-						<option *ngFor = "let account of accountsdata" [ngValue]="account.id.acctNo">
-							{{account.acctType}}
-						</option>
-					</select>
-				</div>
-				<div class="col-md-4 col-12">
-					<button id="act_detail_btn" disabled class="btn btn-md btn-success" (click)="getAccntDetails()">See Details</button>
-				</div>
-			</div>-->
+		
+		<div style="padding: 0" class="col-md-5 col-12 col-sm-12">
 			<div class="container" style="height: 93%">
 				<ul class="card-body" style="list-style-type: none;margin-top: -20px">
 					<h2 class="card-header card2 mb-2"><i class="fas fa-landmark"></i> Accounts Summary</h2>
@@ -43,9 +28,20 @@
 					
 				</ul>
 			</div>
-
-
 			
+		</div>
+
+		<div style="padding: 0" class="col-md-3 col-12 col-sm-12">
+			<div style="color:black" class="container">
+			<h2 class="card card2 card-header"><i class="fab fa-wpexplorer"></i><span class="icon-text-pos">Explore</span></h2><br/>
+			<ul *ngIf="userdata" style="padding: 20px;list-style-type: none;" class="card card2 text-center grow">
+				<li><a mat-raised-button color="" routerLink="/banking/payments/bill_payment">Bill Payment</a></li><hr/>
+				<li><a mat-raised-button color="" routerLink="/banking/transfer/fund_transfer">Fund Transfer</a></li><hr/>
+				<li><a mat-raised-button color="" routerLink="/banking/payments/manage_biller">Manage Billers</a></li><hr/>
+				<li><a mat-raised-button color="" routerLink="/banking/transfer/manage_beneficiary">Manage Beneficiary</a></li>			
+				
+			</ul>
+			</div>
 		</div>
 	</div>
 </div>
