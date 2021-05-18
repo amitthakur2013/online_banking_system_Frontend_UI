@@ -13,7 +13,8 @@ export class AppComponent implements OnInit{
 
   constructor(private router: Router,  
               private activatedRoute: ActivatedRoute,  
-              private titleService: Title) {  
+              private titleService: Title
+              ) {  
   
   }  
 
@@ -26,7 +27,8 @@ export class AppComponent implements OnInit{
           //console.log(data);  
           this.titleService.setTitle(data.title)});  
       });  
-  }  
+  }
+  
   
   getChild(activatedRoute: ActivatedRoute) {  
     if (activatedRoute.firstChild) {  

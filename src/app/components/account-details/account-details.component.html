@@ -1,7 +1,7 @@
 <div class="container mt-2" >
 	<div class="row">
 		<div class="col-md-3  mt-1">
-			<h2 class="text-center card2 card-header"><i class="fas fa-landmark"></i> Account Summary</h2><br/>
+			<h2 class="text-center card2 card-header"><i class="fas fa-landmark"></i> Account Details</h2><br/>
 
 			<ul class="card-body card card2">
 				<li>
@@ -34,10 +34,11 @@
 					<tr>
 						<th>Ref No.</th>
 						<th>Date&Time</th>
-						<th>Benificiary</th>
+						<th>Beneficiary</th>
 						<th>Amount</th>
-						<th>Remark</th>
+						<!--<th>Remark</th>-->
 						<th>Avl. Bal</th>
+						<th>Mode</th>
 						<th>Status</th>
 					</tr>
 				</thead>
@@ -48,8 +49,9 @@
 						<td *ngIf="trans['trans_type']=='Fund_Transfer'">{{trans['benificiary'].name}} Ac/No-{{trans['benificiary'].accountNo}}</td>
 						<td *ngIf="trans['trans_type']=='Bill_Payment'">{{trans['biller']}}</td>
 						<td>{{trans['amount'] | currency:'INR'}}</td>
-						<td>{{trans['remark']}}</td>
+						<!--<td>{{trans['remark']}}</td>-->
 						<td>{{trans['availBal'] | currency:'INR'}}</td>
+						<td>{{trans['transMode']}}</td>
 						<td>{{trans['status']}}</td>
 					</tr>
 				</tbody>
