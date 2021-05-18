@@ -13,7 +13,7 @@
 
 .dropdown>.dropdown-toggle:active {
   /*Without this, clicking will make it sticky*/
-    pointer-events: none;
+   /* pointer-events: none;*/
 }
 
 a:hover{
