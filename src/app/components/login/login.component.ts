@@ -3,6 +3,7 @@ import {LoginService} from '../../services/login.service';
 import {Router,ActivatedRoute} from '@angular/router';
 import * as CryptoJS from 'crypto-js';  
 import {AesUtil} from '../../utilities/securitymech';
+import {NavbarService} from '../../services/navbar.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   errUnauth=0;
 
-  constructor(private loginService:LoginService, private router:Router ) { }
+  constructor(private loginService:LoginService, private router:Router, private navbarService: NavbarService ) { }
 
   ngOnInit(): void {
   
@@ -42,8 +43,10 @@ export class LoginComponent implements OnInit {
       this.loginService.generateToken(this.credentials).subscribe(response => {
         //console.log(response);
         this.loginService.loginUser(response['token']);
+        this.navbarService.show();
         this.router.navigate(['/banking/account/dashboard']).then(() => {
-          window.location.reload();
+          //window.location.reload();
+
          });
         this.errFields=false;
         this.errUnauth=0;

@@ -8,9 +8,7 @@
         <div class="card2 text-center">
           <h2 class="text-center card3 card-header">Fill the Details</h2>
           <mat-form-field>
-            <!--<mat-label>Name</mat-label>
-            <input matInput formControlName="name" placeholder="Last name, First name" required> -->
-             <mat-label>Select an Account</mat-label>
+          <mat-label>Select an Account</mat-label>
              
     		  <mat-select formControlName="fromAccountNo">
             <mat-option  *ngFor = "let account of accntList" value={{account.id.acctNo.toString()}} >{{account.acctType}}</mat-option>
@@ -79,18 +77,20 @@
   <mat-step>
     <ng-template matStepLabel>Transaction Status</ng-template>
     <div class="text-center card2">
-    <mat-spinner *ngIf="!message.category.length" style="margin-left: 42%"></mat-spinner><br/>
-    <div *ngIf="message.category.length">
-      <h2 style="color: red" *ngIf="message.category != 'success'">FAILURE!</h2>
-      <h2 style="color: green" *ngIf="message.category == 'success'">SUCCESS!</h2>
-      <h3 style="font-weight: bold">{{message.content}}</h3><div *ngIf="message.category == 'success' ">
-      <h4><b>Transaction Reference No : </b>{{message.refNo}}</h4>
-      <small style="color: blue">*<i>This can be used for reference</i></small></div><br/>
+      <mat-spinner *ngIf="!message.category.length" style="margin-left: 42%"></mat-spinner><br/>
+      <div *ngIf="message.category.length">
+        <h2 style="color: red" *ngIf="message.category != 'success'">FAILURE!</h2>
+        <h2 style="color: green" *ngIf="message.category == 'success'">SUCCESS!</h2>
+        <h3 style="font-weight: bold">{{message.content}}</h3>
+        <div *ngIf="message.category == 'success' ">
+          <h4><b>Transaction Reference No : </b>{{message.refNo}}</h4>
+          <small style="color: blue">*<i>This can be used for reference</i></small>
+        </div><br/>
+      </div>
+      <div>
+        <button class="ml-2" mat-raised-button color="primary" (click)="resetForm(stepper)">Make Another Transaction</button>
+      </div>
     </div>
-    <div>
-      <button class="ml-2" mat-raised-button color="primary" (click)="resetForm(stepper)">Make Another Transaction</button>
-    </div>
-  </div>
   </mat-step>
 </mat-horizontal-stepper>
 </div>
