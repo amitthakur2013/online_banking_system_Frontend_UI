@@ -111,7 +111,8 @@ export class AddBeneficiaryComponent implements OnInit {
   }
 
   cancelTransaction(){
-  location.reload();
+  //location.reload();
+  this.router.navigate(['/banking/account/dashboard']);
   }
 
 
