@@ -16,15 +16,19 @@ export class AppComponent implements OnInit{
 
   @HostListener('window:beforeunload', ['$event'])
   beforeunloadHandler(event) {
-    event.returnValue = 'You will be logged out!, Are you sure!';
+    if(sessionStorage.getItem('token')){
+      event.returnValue = 'You will be logged out!, Are you sure!';
+    }
     //return false;
   }
 
   @HostListener('window:unload')
   unloadHandler() {
-  if(this.loginService.logout()){
-       this.navbarService.hide();
-       this.router.navigate(['/banking/login']);
+  if(sessionStorage.getItem('token')){
+    if(this.loginService.logout()){
+         this.navbarService.hide();
+         this.router.navigate(['/banking/login']);
+      }
     }
   }
 
