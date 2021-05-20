@@ -3,6 +3,7 @@ import { AccountService } from '../../services/account.service';
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {DialogboxComponent} from '../dialogbox/dialogbox.component';
 import Swal from 'sweetalert2'
+import { ActivatedRoute,Router } from '@angular/router';
 
 @Component({
   selector: 'app-manage-beneficiary',
@@ -11,7 +12,7 @@ import Swal from 'sweetalert2'
 })
 export class ManageBeneficiaryComponent implements OnInit {
 
-  constructor(private accountService : AccountService, private dialog: MatDialog) { }
+  constructor(private accountService : AccountService, private dialog: MatDialog, private router:Router) { }
 
   benifList=[]
   deleteData={
@@ -73,6 +74,10 @@ export class ManageBeneficiaryComponent implements OnInit {
             
           }
         })
+  }
+
+  navigate(url:string){
+    this.router.navigateByUrl(url, { skipLocationChange: true });
   }
 
   /*openDialog(id) {

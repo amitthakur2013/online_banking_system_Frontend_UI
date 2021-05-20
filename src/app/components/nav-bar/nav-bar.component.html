@@ -1,7 +1,6 @@
 
 <nav class="navbar navbar-expand-sm bg-primary navbar-dark card2" >
-	<a *ngIf="!(isLoading | async)" routerLinkActive="active" routerLink="" class="navbar-brand"><i class="fas fa-globe"></i>nline Banking Portal</a>
-  <a *ngIf="isLoading | async" routerLinkActive="active" routerLink="/banking/account/dashboard" class="navbar-brand"><i class="fas fa-globe"></i>nline Banking Portal</a>
+	<a routerLinkActive="active" routerLink="" class="navbar-brand"><i class="fas fa-globe"></i>nline Banking Portal</a>
   <ul class="navbar-nav ml-auto">
   	<li class="nav-item">
       <a *ngIf="!(isLoading | async)" routerLinkActive="active" routerLink="/banking/login" class="nav-link"><i class="fas fa-sign-in-alt"></i> Login </a>
