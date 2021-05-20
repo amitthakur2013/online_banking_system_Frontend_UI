@@ -156,8 +156,11 @@ export class BillPaymentComponent implements OnInit {
   }
 
   resetForm(stepper){
-  stepper.reset();
-  this.ngOnInit();
+  /*this.ngOnInit();
+  stepper.reset();*/
+  this.router.navigateByUrl('/banking/account/dashboard', { skipLocationChange: true }).then(() => {
+    this.router.navigate(['/banking/payments/bill_payment']);
+  }); 
   }
 
 }

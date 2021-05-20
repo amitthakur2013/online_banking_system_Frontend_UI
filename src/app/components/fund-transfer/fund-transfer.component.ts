@@ -142,8 +142,11 @@ export class FundTransferComponent implements OnInit {
   }
 
   resetForm(stepper){
-  stepper.reset();
-  this.ngOnInit();
+  /*stepper.reset();
+  this.ngOnInit();*/
+  this.router.navigateByUrl('/banking/account/dashboard', { skipLocationChange: true }).then(() => {
+    this.router.navigate(['/banking/transfer/fund_transfer']);
+  }); 
   }
 
 }

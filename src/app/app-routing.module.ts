@@ -15,6 +15,7 @@ import { ManageBillerComponent } from './components/manage-biller/manage-biller.
 import { BillPaymentComponent } from './components/bill-payment/bill-payment.component';
 
 import {AuthGuard} from './services/auth.guard';
+import {LoginauthGuard} from './services/loginauth.guard';
 
 const routes: Routes = [
 {
@@ -23,14 +24,16 @@ const routes: Routes = [
 	pathMatch:'full',
 	data : {  
       title: 'Online Banking Portal-Home'  
-  }  
+  },
+  canActivate:[LoginauthGuard]  
 },
 {
 	path:"banking/login",
 	component:LoginComponent,
 	data : {  
       title: 'Online Banking Portal-Login'  
-  }  
+  }  ,
+  canActivate:[LoginauthGuard]
 },
 {
 	path:"banking/account/dashboard",
