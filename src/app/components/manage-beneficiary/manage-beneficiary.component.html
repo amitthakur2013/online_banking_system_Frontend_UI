@@ -1,17 +1,17 @@
 <div class="container text-center">
 	<h2 style="background-color: #87a7ff;color:white" class="card-header mt-2 card2">Beneficiary List</h2>
 	<a class="btn btn-info btn-md" (click)="navigate('/banking/transfer/manage_beneficiary/add')"> Register Beneficiary </a>
-	
+	<div *ngIf="!benifList.length" class="text-center mt-5">
+			<h1 class="text-center">No Beneficiary Exist!</h1>
+	</div>
 	<div  class="row text-center mt-3">
-		<div>
+		<div *ngIf="benifListStatic.length">
 			<mat-form-field>
 			  <mat-label>Search Beneficiary</mat-label>
 			  <input matInput (keyup)="applyFilter($event)" placeholder="Enter name..." #input>
 			</mat-form-field>
-		</div><br/>
-		<div *ngIf="!benifList.length" class="text-center" style="margin-left: 25%">
-			<h1 class="text-center">No Beneficiary Exist!</h1>
 		</div>
+		
 		<table *ngIf="benifList.length" class="table table-striped card2  mb-5">
 				<thead>
 					<tr>
