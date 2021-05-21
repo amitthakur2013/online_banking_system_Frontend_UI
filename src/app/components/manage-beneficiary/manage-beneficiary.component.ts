@@ -16,6 +16,7 @@ export class ManageBeneficiaryComponent implements OnInit {
 
   benifList=[]
   benifListStatic=[]
+  searchCriteria="name";
   deleteData={
     benifId:"",
     transPwd:""
@@ -124,9 +125,10 @@ export class ManageBeneficiaryComponent implements OnInit {
 
     }*/
 
+
     applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.benifList=this.benifListStatic.filter((b) => b.name.toLowerCase().includes(filterValue.toLowerCase()));
+    const filterValue = (event.target as HTMLInputElement).value.trim();
+    this.benifList=this.benifListStatic.filter((b) => b[this.searchCriteria].toString().toLowerCase().includes(filterValue.toString().toLowerCase()));
   }
 
 
