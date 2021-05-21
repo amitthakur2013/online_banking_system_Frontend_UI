@@ -15,6 +15,7 @@ export class ManageBeneficiaryComponent implements OnInit {
   constructor(private accountService : AccountService, private dialog: MatDialog, private router:Router) { }
 
   benifList=[]
+  benifListStatic=[]
   deleteData={
     benifId:"",
     transPwd:""
@@ -30,6 +31,7 @@ export class ManageBeneficiaryComponent implements OnInit {
   getBeneficiaryList(){
   	this.accountService.getAllBeneficiary().subscribe(data => {
   		this.benifList=data;
+      this.benifListStatic=data;
   	}, error => console.warn(error));
   }
 
@@ -43,16 +45,6 @@ export class ManageBeneficiaryComponent implements OnInit {
           cancelButtonText: 'No, keep it'
         }).then((result) => {
           if (result.value) {
-           /*Swal.fire({
-                title: 'Please Wait !',
-                html: 'Delete in progress!',// add html attribute if you want or remove
-                allowOutsideClick: false,
-                showCancelButton: false,
-                showConfirmButton: false,
-                onBeforeOpen: () => {
-                    Swal.showLoading()
-                },
-            });*/
           this.accountService.removeBeneficiary(id).subscribe(data=>{
             this.getBeneficiaryList();
             Swal.fire(
@@ -131,6 +123,11 @@ export class ManageBeneficiaryComponent implements OnInit {
 
 
     }*/
+
+    applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.benifList=this.benifListStatic.filter((b) => b.name.toLowerCase().includes(filterValue.toLowerCase()));
+  }
 
 
 
