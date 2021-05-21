@@ -7,7 +7,16 @@
 	<div  class="row text-center mt-3">
 		<div *ngIf="benifListStatic.length">
 			<mat-form-field>
-			  <mat-label>Search Beneficiary</mat-label>
+            <mat-label>Search Criteria</mat-label>
+      		  <mat-select [(ngModel)]="searchCriteria">
+      		     <mat-option value="name">Name</mat-option>
+      		     <mat-option value="bankName">Bank Name</mat-option>
+      		     <mat-option value="accountNo">Account no</mat-option>
+      		  </mat-select>	
+            
+          	</mat-form-field>
+			<mat-form-field class="ml-2">
+			  <mat-label>Enter Value</mat-label>
 			  <input matInput (keyup)="applyFilter($event)" placeholder="Enter name..." #input>
 			</mat-form-field>
 		</div>
