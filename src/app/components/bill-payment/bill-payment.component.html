@@ -39,14 +39,16 @@
           <mat-form-field>
           <mat-label>Amount</mat-label>
             <input matInput formControlName="amount" placeholder="min amt 1" pattern="[0-9]+(\.[0-9][0-9]?)?" required>
+            <mat-icon matSuffix>account_balance_wallet</mat-icon>
           </mat-form-field><br/>
-          <small style="color: blue">(Enter amt max upto 2 decimal places)</small>
+          <mat-hint><small>(Enter amt max upto 2 decimal places)</small></mat-hint>
           <div *ngIf="firstFormGroupControl.amount.invalid && (firstFormGroupControl.amount.dirty || firstFormGroupControl.amount.touched)" class="alert alert-danger err-toast mb-1">
             <small>Enter valid amount.</small>
           </div><br/>
           <mat-form-field>
           <mat-label>Remark(optional)</mat-label>
             <input matInput formControlName="remark" placeholder="" >
+            <mat-icon matSuffix> comment</mat-icon>
           </mat-form-field>
           
           <div>

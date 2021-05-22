@@ -23,6 +23,8 @@ export class LoginComponent implements OnInit {
 
   errUnauth=0;
 
+  hide=true;
+
   constructor(private loginService:LoginService, private router:Router, private navbarService: NavbarService ) { }
 
   ngOnInit(): void {
