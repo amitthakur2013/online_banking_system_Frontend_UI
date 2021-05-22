@@ -87,18 +87,21 @@ export class FundTransferComponent implements OnInit {
   this.fullData.toBenifId=parseInt(this.firstFormGroup.value.toBenifId);
   this.fullData.amount=parseFloat(this.firstFormGroup.value.amount);
   this.fullData.remark=this.firstFormGroup.value.remark;
-  
+  if(this.fullData.fromAccountNo && this.fullData.toBenifId && this.fullData.amount){
     this.accountService.getBeneficiaryDetails(this.fullData.toBenifId).subscribe(data =>{
       this.benifDetail=data;
     }, error => console.log(error));
+    var div =  document.querySelector('#initial_head');
+    var div2= document.querySelector('.poscent');
+    if(div!=null && div2!=null){
+      div.classList.remove('checkheader');
+      div2.classList.remove('poscent');
+    }
+  }
   
 
   //console.log(this.firstFormGroup.value);
 
-  var div =  document.querySelector('#initial_head');
-  var div2= document.querySelector('.poscent');
-  div.classList.remove('checkheader');
-  div2.classList.remove('poscent');
   }
 
   secondFormData(stepper){

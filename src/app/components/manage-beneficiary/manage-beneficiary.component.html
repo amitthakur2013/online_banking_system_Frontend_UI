@@ -15,7 +15,8 @@
           	</mat-form-field>
 			<mat-form-field class="ml-2">
 			  <mat-label>Enter Value</mat-label>
-			  <input matInput (keyup)="applyFilter($event)" placeholder="Enter name..." #input>
+			  <input matInput (keyup)="applyFilter($event)" placeholder="Enter..." #input>
+			  <mat-icon matSuffix>search</mat-icon>
 			</mat-form-field>
 		</div>
 		
@@ -55,7 +56,7 @@
 	<div *ngIf="!benifListStatic.length" class="text-center mt-5">
 			<h1 class="text-center">No Beneficiary Exist!</h1>
 	</div>
-	<div *ngIf="!benifList.length && benifListStatic.length" class="text-center mt-5">
+	<div *ngIf="!benifList.length && benifListStatic.length" class="text-center mt-5 alert alert-info">
 			<h1 class="text-center">No Beneficiary Exist having {{notFound}}</h1>
 	</div>
 	

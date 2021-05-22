@@ -104,12 +104,13 @@ export class BillPaymentComponent implements OnInit {
   this.fullData.remark=this.firstFormGroup.value.remark;
 
   //console.log(this.firstFormGroup.value);
-
-  var div =  document.querySelector('#initial_head');
-  var div2= document.querySelector('.poscent');
-    if(div !=null && div2!=null){
-    div.classList.remove('checkheader');
-    div2.classList.remove('poscent');
+  if(this.fullData.fromAccountNo && this.fullData.biller.length && this.fullData.amount){
+    var div =  document.querySelector('#initial_head');
+    var div2= document.querySelector('.poscent');
+      if(div !=null && div2!=null){
+      div.classList.remove('checkheader');
+      div2.classList.remove('poscent');
+      }
     }
   }
 

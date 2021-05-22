@@ -25,11 +25,16 @@
 	          			<mat-form-field *ngIf="firstFormGroup.value.selectedCat=='Mobile_Recharge'">
 				          	<mat-label>Mobile No</mat-label>
 				            <input matInput formControlName="mobNo" placeholder="" pattern="^[0-9]{10}$">
+                    <mat-icon matSuffix>phone</mat-icon>
 				        </mat-form-field>
                 <div *ngIf="firstFormGroupControl.mobNo.invalid && (firstFormGroupControl.mobNo.dirty || firstFormGroupControl.mobNo.touched)" class="alert alert-danger err-toast mb-1">
                   <div *ngIf="firstFormGroupControl.mobNo.errors.minlength || firstFormGroupControl.mobNo.errors.maxlength">
                     <small>Mob No must be of 10 digit.</small>
                   </div>
+                  <div *ngIf="!(firstFormGroupControl.mobNo.errors.minlength || firstFormGroupControl.mobNo.errors.maxlength)">
+                    <small>Enter valid mob no.</small>
+                  </div>
+                  
                 </div>
 
 				        <mat-form-field *ngIf="firstFormGroup.value.selectedCat=='Insurance'">
