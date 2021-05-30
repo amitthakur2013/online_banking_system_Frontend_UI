@@ -19,39 +19,40 @@
 			  <mat-icon matSuffix>search</mat-icon>
 			</mat-form-field>
 		</div>
-		
-		<table *ngIf="benifList.length" class="table table-striped card2  mb-5">
-				<thead>
-					<tr>
-						<th>Sl/No</th>
-						<th>Name</th>
-						<th>Bank Name</th>
-						<th>Branch Name</th>
-						<th>Ifsc Code</th>
-						<th>Account No</th>
-						<th>Actions</th>
-						
-					</tr>
-				</thead>
-				<tbody>
-					<tr *ngFor = "let beneficiary of benifList; let i=index">
-						<td>{{i+1}}</td>
-						<td>{{beneficiary.name}}</td>
-						<td>{{beneficiary.bankName}}</td>
-						<td>{{beneficiary.branchName}}</td>
-						<td>{{beneficiary.ifscCode}}</td>
-						<td>{{beneficiary.accountNo}}</td>
-						<td>
-						<a mat-raised-button color="primary" routerLink="/banking/transfer/manage_beneficiary/{{beneficiary.benifId}}"><mat-icon>edit</mat-icon></a>
-						<button class="ml-1" mat-raised-button color="warn" (click)="removeBenif(beneficiary.benifId)"><mat-icon>delete</mat-icon></button>
+		<div style="max-height: 300px;overflow: auto;padding: 0;margin:0;width: 100%">
+			<table *ngIf="benifList.length" class="table table-striped card2  mb-5">
+					<thead>
+						<tr>
+							<th>Sl/No</th>
+							<th>Name</th>
+							<th>Bank Name</th>
+							<th>Branch Name</th>
+							<th>Ifsc Code</th>
+							<th>Account No</th>
+							<th>Actions</th>
+							
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor = "let beneficiary of benifList; let i=index">
+							<td>{{i+1}}</td>
+							<td>{{beneficiary.name}}</td>
+							<td>{{beneficiary.bankName}}</td>
+							<td>{{beneficiary.branchName}}</td>
+							<td>{{beneficiary.ifscCode}}</td>
+							<td>{{beneficiary.accountNo}}</td>
+							<td>
+							<a mat-raised-button color="primary" routerLink="/banking/transfer/manage_beneficiary/{{beneficiary.benifId}}"><mat-icon>edit</mat-icon></a>
+							<button class="ml-1" mat-raised-button color="warn" (click)="removeBenif(beneficiary.benifId)"><mat-icon>delete</mat-icon></button>
 
 
-						</td>
+							</td>
 
-						
-					</tr>
-				</tbody>
-			</table>
+							
+						</tr>
+					</tbody>
+				</table>
+			</div>
 	</div>
 	<div *ngIf="!benifListStatic.length" class="text-center mt-5">
 			<h1 class="text-center">No Beneficiary Exist!</h1>

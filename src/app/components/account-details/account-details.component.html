@@ -26,12 +26,13 @@
 			</ul>
 		</div>
 
-		<div class="mt-1 col-md-9 mb-5" style="color: black;border-radius: 0.25rem">
-			<h2 class="text-center card-header card2"><i class="fas fa-paperclip"></i> Mini Statement</h2>
+		<div class="mt-1 col-md-9 mb-5" style="color: black;border-radius: 0.25rem;">
+			<div style="position: sticky;top:10px;z-index: 99"><h2 class="text-center card-header card2"><i class="fas fa-paperclip"></i> Mini Statement</h2></div>
 			<div *ngIf="!transinfo.length">
 				<hr/>
 				<h1  class="text-center">No Transactions Yet!</h1>
 			</div>
+			<div style=" max-height:400px;overflow: auto">
 			<table *ngIf="transinfo.length" class="table table-striped card2 mt-4">
 				<thead>
 					<tr>
@@ -59,6 +60,7 @@
 					</tr>
 				</tbody>
 			</table>
+			</div>
 		</div>
 	</div>
 </div>

@@ -6,38 +6,39 @@
 	</div>
 
 	<div  class="row text-center mt-1">
-		
-		<table *ngIf="billers.length" class="table table-striped card2 mb-5">
-			<thead>
-					<tr>
-						<th>Sl/No</th>
-						<th>Unique Id</th>
-						<th>Customer Id</th>
-						<th>Bill Category</th>
-						<th>Bill Merchant</th>
-						<th>Actions</th>
-						
-					</tr>
-			</thead>
-			<tbody>
-					<tr *ngFor = "let biller of billers; let i = index">
-						<td>{{i+1}}</td>
-						<td>{{biller.mobNo}}{{biller.premiumNo}}{{biller.electricbillNo}}</td>
-						<td>{{biller.customerId}}</td>
-						<td>{{biller.vendor.category}}</td>
-						<td>{{biller.vendor.vcompName}}</td>
-						<td>
-						<a mat-raised-button color="primary" routerLink="/banking/payments/manage_biller/{{biller.billerId}}"><mat-icon>edit</mat-icon></a>
+		<div style="max-height: 350px;overflow: auto;padding: 0;margin:0;width: 100%">
+			<table *ngIf="billers.length" class="table table-striped card2 mb-5">
+				<thead>
+						<tr>
+							<th>Sl/No</th>
+							<th>Unique Id</th>
+							<th>Customer Id</th>
+							<th>Bill Category</th>
+							<th>Bill Merchant</th>
+							<th>Actions</th>
 							
-						<button class="ml-1" mat-raised-button color="warn" (click)="removeBiller(biller.billerId)"><mat-icon>delete</mat-icon></button>
+						</tr>
+				</thead>
+				<tbody>
+						<tr *ngFor = "let biller of billers; let i = index">
+							<td>{{i+1}}</td>
+							<td>{{biller.mobNo}}{{biller.premiumNo}}{{biller.electricbillNo}}</td>
+							<td>{{biller.customerId}}</td>
+							<td>{{biller.vendor.category}}</td>
+							<td>{{biller.vendor.vcompName}}</td>
+							<td>
+							<a mat-raised-button color="primary" routerLink="/banking/payments/manage_biller/{{biller.billerId}}"><mat-icon>edit</mat-icon></a>
+								
+							<button class="ml-1" mat-raised-button color="warn" (click)="removeBiller(biller.billerId)"><mat-icon>delete</mat-icon></button>
 
 
-						</td>
+							</td>
 
-						
-					</tr>
-				</tbody>
-		</table>
+							
+						</tr>
+					</tbody>
+			</table>
+		</div>
 	</div>
 	
 </div>
